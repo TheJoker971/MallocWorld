@@ -23,5 +23,7 @@ void genereTrees(int**,int);
 void genereNoRoad(int**);
 Coordonnee verifyBlank(int**);
 void setPlayer(int**);
+void preSaveMap(int**);
+void drawInFile(FILE*,int**);
 
 #endif // MAP_H

@@ -12,11 +12,12 @@ int** initMap(){
     int** map = allowMemory();
     setBlankMap(map);
     genereMobs(map,10);
-    genereFlowers(map,3);
-    genereRocks(map,3);
-    genereTrees(map,3);
+    genereFlowers(map,(height+width)/2);
+    genereRocks(map,(height+width)/2);
+    genereTrees(map,(height+width)/2);
     genereNoRoad(map);
     setPlayer(map);
+    preSaveMap(map);
     return map;
 }
 
@@ -85,7 +86,7 @@ void genereTrees(int** map,int n){
 }
 
 void genereNoRoad(int** map){
-    int n = rand()%10;
+    int n = rand()%(height+width);
     for(int i = 0;i <n;i++){
         Coordonnee xy = verifyBlank(map);
         map[xy.x][xy.y] = -1;     
@@ -109,4 +110,26 @@ Coordonnee verifyBlank(int** map){
 void setPlayer(int** map){
     Coordonnee xy = verifyBlank(map);
     map[xy.x][xy.y] = 1;     
+}
+
+void drawInFile(FILE* f,int** map){
+    for(int i =0;i<height;i++){
+        for(int j =0;j<width;j++){
+            if(j<width-1){
+                fprintf(f,"%d ",map[i][j]);
+            }else{
+                fprintf(f,"%d\n",map[i][j]);
+            }
+        }
+    }
+}
+
+void preSaveMap(int** map){
+    FILE* file = fopen("presave.txt","w+");
+    while(file != NULL){
+        fprintf(file,"=== MAP ===\n");
+        drawInFile(file,map);
+        fclose(file);
+        file = NULL;
+    }
 }
