@@ -11,6 +11,7 @@
 int** initMap(){
     int** map = allowMemory();
     setBlankMap(map);
+    setPnj(map);
     genereMobs(map,10);
     genereFlowers(map,(height+width)/2);
     genereRocks(map,(height+width)/2);
@@ -110,6 +111,11 @@ Coordonnee verifyBlank(int** map){
 void setPlayer(int** map){
     Coordonnee xy = verifyBlank(map);
     map[xy.x][xy.y] = 1;     
+}
+
+void setPnj(int** map){
+    Coordonnee xy = verifyBlank(map);
+    map[xy.x][xy.y] = 2;     
 }
 
 void drawInFile(FILE* f,int** map){
