@@ -4,10 +4,15 @@
 
 int main(int argc, const char* argv[]){
     // Initialisation de la map
-    int** map = initMap();
+    int*** map = initMap();
     //Dessin de la map
-    draw(map);
+    drawMap(map);
     // Libération de la Memoire
     freeMap(map);
+    
+    printf("\n");
+    drawMap(map);
+
+
     return 0;
 }
