@@ -96,7 +96,11 @@ void setBlankMap(int** map){
 void genereMobs(int** map,int n){
     for(int i = 0;i <n;i++){
         Coordonnee xy = verifyBlank(map);
-        map[xy.x][xy.y] = 12;     
+        int monster = rand() % 99;
+        while(monster<12){
+            monster = rand() % 99;
+        }
+        map[xy.x][xy.y] = monster;     
     }
 }
 
