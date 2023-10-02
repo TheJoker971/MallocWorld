@@ -44,8 +44,7 @@ void draw(int** map){
 void freeMap(int** map){
     // Libère la mémoire utilisée par le tableau
     for(int i = 0;i<height;i++){
-        
-        free(map[i]);
+            free(map[i]);
     }
     free(*map);
 }
