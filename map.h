@@ -11,20 +11,24 @@ struct Coordonnee{
 
 typedef struct Coordonnee Coordonnee;
 
-int** initMap();
+int*** initMap();
+int** initPart(int);
 int** allowMemory();
-void draw(int**);
-void freeMap(int**);
+void drawMap(int**[]);
+void drawPart(int**);
+void freeMap(int**[]);
 void genereMobs(int**,int);
 void setBlankMap(int**);
 void genereFlowers(int**,int);
 void genereRocks(int**,int);
 void genereTrees(int**,int);
 void genereNoRoad(int**);
+void generePortals(int**,int);
+void genereBoss(int**);
 Coordonnee verifyBlank(int**);
 void setPlayer(int**);
 void setPnj(int**);
-void preSaveMap(int**);
+void preSaveMap(int**[]);
 void drawInFile(FILE*,int**);
 
 #endif // MAP_H
