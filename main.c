@@ -12,7 +12,5 @@ int main(int argc, const char* argv[]){
     
     printf("\n");
     drawMap(map);
-
-
     return 0;
 }

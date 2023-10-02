@@ -167,6 +167,7 @@ void setPnj(int** map){
     map[xy.x][xy.y] = 2;     
 }
 
+
 void generePortals(int** map,int n){
     switch(n){
         case 0:
