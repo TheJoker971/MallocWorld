@@ -5,9 +5,10 @@
 
 int main(int argc, const char* argv[]){
     // Initialisation de la map
-    int** map = initMap();
-    //Dessin de la map
+    int*** map = initMap();
+  //Dessin de la map
     draw(map);
+  //Conditions qui demande à l'utilisateur d'entrer une touche
     char depl = 'A';
     do {
         printf("Entrer un truc : ");
@@ -22,5 +23,8 @@ int main(int argc, const char* argv[]){
     } while (1);
     // Libération de la Memoire
     freeMap(map);
+    
+    printf("\n");
+    drawMap(map);
     return 0;
 }
