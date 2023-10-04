@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "mapping.h"
+#include "map.h"
 #include "player.h"
 #include "pnj.h"
 
