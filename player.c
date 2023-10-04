@@ -2,21 +2,49 @@
 #include <stdlib.h>
 #include "player.h"
 
-Player initPlayer(){
-    Player p;
-    p.pv = 100;
-    p.maxPv = 100;
-    p.exp = 1;
-    p.inventaire = malloc(sizeof(int)*10);
-    p.inventaire[0] = 1,p.inventaire[1] =2, p.inventaire[2] = 3, p.inventaire[3] = 4;
-    return p;
+void startPlayer(Player *p) // initialisation du player par défaut
+{
+    p->pv = 100;
+    p->niveau = 1;
+    p->experience = 1; // 375 xp pour passer un niveau
+    p->max = 100;      // nombre de coeur
+    p->inventaire = malloc(sizeof(Elements) * 10);
+
+    for (int i = 0; i < 4; i++)
+    {
+        Elements e;
+        e.elements = i + 1;
+        e.capacity = 1;
+        e.maxCapacity = 1;
+        e.type = ARMES;
+        p->inventaire[i] = e;
+
+        // printf("%d \n", p->inventaire[i].numElements);
+    }
+    Elements e;
+    e.elements = 5;
+    e.capacity = 5;
+    e.maxCapacity = 20;
+    e.type = CRAFTS;
+    p->inventaire[4] = e;
 }
 
-void showInventaire(Player p){
-    int i = 0;
-    while(p.inventaire[i] <5 && i < 10){
-        printf("Une arme dans l'inventaire case %d\n",i+1);
-        printf("%d\n",p.inventaire[i]);
-        i++;
+void addElements(Player p, Elements e)
+{
+    for (int i = 0; i < 5; i++)
+    {
+        if (e.elements == p.inventaire[i].elements && p.inventaire[i].capacity != p.inventaire[i].maxCapacity)
+        {
+            p.inventaire[i].capacity += e.capacity;
+        }
+        printf("%d\n", p.inventaire[i].capacity);
+    }
+}
+
+void showInventaire(Player p)
+{
+    for (int i = 0; i < 10; i++)
+    {
+        printf("%d\n", p.inventaire[i].type);
     }
 }

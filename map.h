@@ -12,6 +12,7 @@ struct Coordonnee{
 
 typedef struct Coordonnee Coordonnee;
 
+
 void moveUp(int**[]);
 int*** initMap();
 int** initPart(int);
@@ -36,5 +37,6 @@ int percent();
 void saveMap(int** []);
 int*** chargeMap();
 void chargePart(int,int**);
+
 
 #endif // MAP_H
