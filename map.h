@@ -1,7 +1,7 @@
 #ifndef MAP_H
 #define MAP_H
 
-#define height  10 
+#define height  10
 #define width   10
 
 struct Coordonnee{

@@ -5,8 +5,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void checkMovement(int resultTab){
+int checkMovement(int resultTab){
     char yesNo;
+    int zone = 0;
 
     switch (resultTab) {
         case 12:
@@ -31,6 +32,11 @@ void checkMovement(int resultTab){
         case 5:
             printf("\n\n\nBois\n\n\n");
             break;
-    }
 
+        case -2:
+            printf("\n\n\nPORTAIL\n\n\n");
+            zone = 1;
+            break;
+    }
+    return zone;
 }
