@@ -4,10 +4,19 @@
 #include "movePlayer.h"
 
 int main(int argc, const char* argv[]){
+    
     // Initialisation de la map
     int*** map = initMap();
-  //Dessin de la map
-    draw(map);
+
+    //Dessin de la map
+    drawMap(map);
+    // SaveMap
+    saveMap(map);
+    printf("\n");
+    // Chargement de la map
+    int*** map = chargeMap();
+    // Affichage des changements
+    drawMap(map);
   //Conditions qui demande à l'utilisateur d'entrer une touche
     char depl = 'A';
     do {
@@ -24,7 +33,8 @@ int main(int argc, const char* argv[]){
     // Libération de la Memoire
     freeMap(map);
     
-    printf("\n");
-    drawMap(map);
+    
+    // showInventaire(p);
+
     return 0;
 }
