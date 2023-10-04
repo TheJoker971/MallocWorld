@@ -3,16 +3,37 @@
 #include "map.h"
 #include "player.h"
 #include "pnj.h"
+#include "movePlayer.h"
 
-int main(int argc, const char *argv[])
-{
-    // // initialisation de la map
-    // int **map = initMap();
-    // // Dessiner la map
-    // draw(map);
-    // // On libere la ram
-    // freeMap(map);
+int main(int argc, const char* argv[]){
+    
+    // Initialisation de la map
+    int*** map = initMap();
 
+    //Dessin de la map
+    drawMap(map);
+    // SaveMap
+    saveMap(map);
+    printf("\n");
+    // Chargement de la map
+    int*** map1 = chargeMap();
+    // Affichage des changements
+    drawMap(map1);
+  //Conditions qui demande à l'utilisateur d'entrer une touche
+    char depl = 'A';
+    do {
+        printf("Entrer un truc : ");
+        scanf(" %c", &depl);
+
+        if (depl == 'z' || depl == 's' || depl == 'q' || depl == 'd') {
+            // Appele de la fonction movePlayer
+            movePlayer(map, depl);
+        } else {
+            printf("Entrée non valide. Veuillez réessayer.\n");
+        }
+    } while (1);
+  
+    printf("\t-------PLAYER-----------\n");
     // joueur
     Player p;
 
@@ -24,6 +45,11 @@ int main(int argc, const char *argv[])
     // show inventaire
 
     showInventaire(p);
-
+    // Libération de la Memoire
+    freeMap(map1);
+    freeMap(map);
+    
+    
+    // showInventaire(p);
     return 0;
 }

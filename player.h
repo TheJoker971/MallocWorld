@@ -17,4 +17,5 @@ void startPlayer(Player *);
 void addElements(Player p, Elements e);
 void showInventaire(Player p);
 
-#endif // COMPUTER_H
+#endif // PLAYER_H
+
