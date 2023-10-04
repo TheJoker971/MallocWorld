@@ -23,5 +23,7 @@ int main(int argc, const char* argv[]){
     
     // showInventaire(p);
 
+    printf("\n");
+    drawMap(map);
     return 0;
 }
