@@ -45,6 +45,7 @@ int checkMovement(int resultTab){
 
         default:
             printf("\n ERREUR \n");
+            break;
     }
     return zone;
 }

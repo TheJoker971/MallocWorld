@@ -12,6 +12,7 @@ void movePlayer(int*** tab, char deplacement){
     int zone = 0;
     switch (deplacement) {
         case 'z':
+            
             for (int i = 0; i < 10; i++) {
                 for (int j = 0; j < 10; j++) {
                     if (tab[0][i][j] == 1) {
