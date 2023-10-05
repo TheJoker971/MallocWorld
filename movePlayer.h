@@ -4,5 +4,5 @@
 
 #ifndef MALLOCWORLD_MOVEPLAYER_H
 #define MALLOCWORLD_MOVEPLAYER_H
-void movePlayer(int** tab, char);
+void movePlayer(int*** tab, char);
 #endif //MALLOCWORLD_MOVEPLAYER_H

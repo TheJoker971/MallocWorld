@@ -65,9 +65,9 @@ int** initPart(int n){
     }
     setPnj(part);
     genereMobs(part);
-    genereFlowers(part);
-    genereRocks(part);
-    genereTrees(part);
+    genereFlowers(part,n);
+    genereRocks(part,n);
+    genereTrees(part,n);
     genereNoRoad(part);
     
     return part;
@@ -153,27 +153,27 @@ void genereBoss(int** map){
     map[xy.x][xy.y] = 99;
 }
 
-void genereFlowers(int** map){
+void genereFlowers(int** map,int s){
     int n = percent();
     for(int i = 0;i <n;i++){
         Coordonnee xy = verifyBlank(map);
-        map[xy.x][xy.y] = 3;     
+        map[xy.x][xy.y] = 3+(3*s);     
     }
 }
 
-void genereRocks(int** map){
+void genereRocks(int** map,int s){
     int n = percent();
     for(int i = 0;i <n;i++){
         Coordonnee xy = verifyBlank(map);
-        map[xy.x][xy.y] = 4;     
+        map[xy.x][xy.y] = 4+(3*s);     
     }
 }
 
-void genereTrees(int** map){
+void genereTrees(int** map,int s){
     int n = percent();
     for(int i = 0;i <n;i++){
         Coordonnee xy = verifyBlank(map);
-        map[xy.x][xy.y] = 5;     
+        map[xy.x][xy.y] = 5+(3*s);     
     }
 }
 
