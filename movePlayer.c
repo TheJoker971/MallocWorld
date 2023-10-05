@@ -18,10 +18,10 @@ void movePlayer(int*** tab, char deplacement){
                         int resultTab = tab[0][i - 1][j];
                         checkMovement(resultTab);
                         tab[0][i][j] = 0;
-                        if(i > 0){
+                        if(i != 0){
                             tab[0][i - 1][j] = 1;
-                        } else{
-                            tab[0][i][j] = 1;
+                        } else {
+                            tab[0][0][j] = 1;
                         }
                     }
                 }
@@ -52,26 +52,23 @@ void movePlayer(int*** tab, char deplacement){
                 for (int j = 10; j >=0; j--) {
                     if (tab[0][i][j] == 1) {
                         int resultTab = tab[0][i][j+1];
-                        int check = 0;
-                        checkMovement(resultTab);
-                        tab[0][i][j] = 0;
-                        if(check == 1){
+                        tab[zone][i][j] = 0;
+                        if(checkMovement(resultTab) == 1){
                             zoneTravel(tab);
                             zone = 1;
-                            break;
                         }
                         else{
                             if(j<9){
-                                tab[0][i][j+1] = 1;
+                                tab[zone][i][j+1] = 1;
                             } else {
-                                tab[0][i][j] = 1;
+                                tab[zone][i][j] = 1;
                             }
                         }
                     } else if (tab[1][i][j] == 1) {
                         int resultTab = tab[1][i][j+1];
                         checkMovement(resultTab);
                         tab[1][i][j] = 0;
-
+                        printf("\n\n\nla zone est: %d\n\n\n", zone);
                             if(j<9){
                                 tab[1][i][j+1] = 1;
                             } else {
@@ -92,12 +89,11 @@ void movePlayer(int*** tab, char deplacement){
                         tab[0][i][j] = 0;
                         if(i<9){
                             tab[0][i+1][j] = 1;
-                        } else{
+                        } else {
                             tab[0][i][j] = 1;
                         }
                     }
                 }
-
             }
             drawMap(tab);
             break;

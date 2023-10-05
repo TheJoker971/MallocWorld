@@ -37,6 +37,14 @@ int checkMovement(int resultTab){
             printf("\n\n\nPORTAIL\n\n\n");
             zone = 1;
             break;
+
+        case -3:
+            printf("\n\n\nPORTAIL\n\n\n");
+            zone = 2;
+            break;
+
+        default:
+            printf("\n ERREUR \n");
     }
     return zone;
 }
