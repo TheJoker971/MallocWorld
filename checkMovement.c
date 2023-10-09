@@ -35,16 +35,17 @@ int checkMovement(int resultTab){
 
         case -2:
             printf("\n\n\nPORTAIL\n\n\n");
-            zone = 1;
+            zone = 2;
             break;
 
         case -3:
             printf("\n\n\nPORTAIL\n\n\n");
-            zone = 2;
+            zone = 3;
             break;
 
         default:
             printf("\n ERREUR \n");
+            break;
     }
     return zone;
 }

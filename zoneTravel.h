@@ -4,5 +4,8 @@
 
 #ifndef MALLOCWORLD_ZONETRAVEL_H
 #define MALLOCWORLD_ZONETRAVEL_H
-void zoneTravel(int*** );
+void zoneTravelRight(int*** );
+void zoneTravelLeft(int*** );
+void zoneTravelA(int*** );
+void zoneTravelUp(int*** );
 #endif //MALLOCWORLD_ZONETRAVEL_H

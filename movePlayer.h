@@ -5,4 +5,12 @@
 #ifndef MALLOCWORLD_MOVEPLAYER_H
 #define MALLOCWORLD_MOVEPLAYER_H
 void movePlayer(int*** tab, char);
+void moveUp(int***);
+void moveDown(int***);
+void moveLeft(int***);
+void moveRight(int***);
+void moveRightZone(int***,int,int);
+void moveLeftZone(int***, int, int);
+void moveUpZone(int***,int,int);
+void moveDownZone(int***, int, int);
 #endif //MALLOCWORLD_MOVEPLAYER_H

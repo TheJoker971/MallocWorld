@@ -7,99 +7,142 @@
 #include "map.h"
 #include "checkMovement.h"
 #include "zoneTravel.h"
+
+int zone = 0;
+
 void movePlayer(int*** tab, char deplacement){
 
-    int zone = 0;
     switch (deplacement) {
         case 'z':
-            for (int i = 0; i < 10; i++) {
-                for (int j = 0; j < 10; j++) {
-                    if (tab[0][i][j] == 1) {
-                        int resultTab = tab[0][i - 1][j];
-                        checkMovement(resultTab);
-                        tab[0][i][j] = 0;
-                        if(i != 0){
-                            tab[0][i - 1][j] = 1;
-                        } else {
-                            tab[0][0][j] = 1;
-                        }
-                    }
-                }
-            }
+            moveUp(tab);
             drawMap(tab);
             break;
 
         case 'q':
-            for (int i = 0; i < 10; i++) {
-                for (int j = 0; j < 10; j++) {
-                    if (tab[0][i][j] == 1) {
-                        int resultTab = tab[0][i][j - 1];
-                        checkMovement(resultTab);
-                        tab[0][i][j] = 0;
-                        if(j>0){
-                            tab[0][i][j-1] = 1;
-                        } else if (j==0){
-                            tab[0][i][j] = 1;
-                        }
-                    }
-                }
-            }
+            moveLeft(tab);
             drawMap(tab);
             break;
 
         case 'd':
-            for (int i = 0; i <10; i++) {
-                for (int j = 10; j >=0; j--) {
-                    if (tab[0][i][j] == 1) {
-                        int resultTab = tab[0][i][j+1];
-                        tab[zone][i][j] = 0;
-                        if(checkMovement(resultTab) == 1){
-                            zoneTravel(tab);
-                            zone = 1;
-                        }
-                        else{
-                            if(j<9){
-                                tab[zone][i][j+1] = 1;
-                            } else {
-                                tab[zone][i][j] = 1;
-                            }
-                        }
-                    } else if (tab[1][i][j] == 1) {
-                        int resultTab = tab[1][i][j+1];
-                        checkMovement(resultTab);
-                        tab[1][i][j] = 0;
-                        printf("\n\n\nla zone est: %d\n\n\n", zone);
-                            if(j<9){
-                                tab[1][i][j+1] = 1;
-                            } else {
-                                tab[1][i][j] = 1;
-                            }
-                    }
-                }
-            }
+            moveRight(tab);
             drawMap(tab);
             break;
 
         case 's':
-            for (int i = 9; i >= 0; i--) {
-                for (int j = 0; j < 10; j++) {
-                    if (tab[0][i][j] == 1) {
-                        int resultTab = tab[0][i + 1][j];
-                        checkMovement(resultTab);
-                        tab[0][i][j] = 0;
-                        if(i<9){
-                            tab[0][i+1][j] = 1;
-                        } else {
-                            tab[0][i][j] = 1;
-                        }
-                    }
-                }
-            }
+            moveDown(tab);
             drawMap(tab);
             break;
 
         default:
             printf("ERROR\n");
             break;
+    }
+}
+
+void moveUp(int*** tab){
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            if (tab[zone][i][j] == 1) {
+                moveUpZone(tab, i, j);
+            }
+        }
+    }
+}
+
+void moveDown(int*** tab){
+    for (int i = 9; i >= 0; i--) {
+        for (int j = 0; j < 10; j++) {
+            if (tab[zone][i][j] == 1) {
+                moveDownZone(tab, i, j);
+            }
+        }
+    }
+}
+
+void moveLeft(int*** tab){
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            if (tab[zone][i][j] == 1) {
+                moveLeftZone(tab, i, j);
+            }
+        }
+    }
+}
+
+void moveRight(int*** tab){
+    for (int i = 0; i <10; i++) {
+        for (int j = 10; j >=0; j--) {
+            if (tab[zone][i][j] == 1) {
+                moveRightZone(tab, i, j);
+            }
+        }
+    }
+}
+
+void moveRightZone(int*** tab,int i,int j){
+    int resultTab = tab[zone][i][j+1];
+    tab[zone][i][j] = 0;
+    if(checkMovement(resultTab) == 2){
+        zoneTravelRight(tab);
+        zone = 1;
+    } else{
+        if(j<9){
+            tab[zone][i][j+1] = 1;
+        } else {
+            tab[zone][i][j] = 1;
+        }
+    }
+}
+
+
+void moveLeftZone(int*** tab, int i, int j){
+    int resultTab = tab[zone][i][j - 1];
+    tab[zone][i][j] = 0;
+    if(checkMovement(resultTab) == 2){
+        zoneTravelLeft(tab);
+        zone = 1;
+    } else{
+        printf("ELSE\n");
+        if(j>0){
+            tab[zone][i][j-1] = 1;
+        } else if (j==0){
+            tab[zone][i][j] = 1;
+        }
+    }
+}
+
+void moveUpZone(int*** tab,int i,int j){
+    int resultTab = tab[0][i - 1][j];
+    tab[zone][i][j] = 0;
+    if(checkMovement(resultTab) == 2){
+        zoneTravelUp(tab);
+        zone = 1;
+    } else {
+        printf("ELSE\n");
+        if(i != 0){
+            tab[zone][i - 1][j] = 1;
+        } else {
+            tab[zone][0][j] = 1;
+        }
+    }
+}
+
+void moveDownZone(int*** tab, int i, int j){
+    int resultTab = tab[zone][i + 1][j];
+    tab[zone][i][j] = 0;
+    if(checkMovement(resultTab) == 2){
+        zone = 1;
+        printf("ZONE : %d\n", zone);
+        //tab[1][6][2] = 1;
+        tab[1][1][2] = 1;
+        drawMap(tab);
+    }
+    else {
+        printf("ZONE__: %d\n", zone);
+        if(i<9){
+            tab[zone][i+1][j] = 1;
+        } else {
+            tab[zone][i][j] = 1;
+        }
     }
 }
