@@ -6,9 +6,9 @@
 #include "zoneTravel.h"
 #include "map.h"
 
-void zoneTravelRight(int*** tab){
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
+void zoneTravelRightZone1To2(int*** tab){
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
             if (tab[1][i][j] == -2) {
                 tab[1][i][j+1] = 1;
             }
@@ -16,9 +16,19 @@ void zoneTravelRight(int*** tab){
     }
 }
 
-void zoneTravelLeft(int*** tab){
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
+void zoneTravelRightZone2To3(int*** tab){
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            if (tab[2][i][j] == -3) {
+                tab[2][i][j+1] = 1;
+            }
+        }
+    }
+}
+
+void zoneTravelLeftZone1To2(int*** tab){
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
             if (tab[1][i][j] == -2) {
                 tab[1][i][j-1] = 1;
             }
@@ -26,9 +36,19 @@ void zoneTravelLeft(int*** tab){
     }
 }
 
-void zoneTravelA(int*** tab){
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
+void zoneTravelLeftZone2To3(int*** tab){
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            if (tab[2][i][j] == -3) {
+                tab[2][i][j-1] = 1;
+            }
+        }
+    }
+}
+
+void zoneTravelDownZone1To2(int*** tab){
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
             if (tab[1][i][j] == -2) {
                 tab[1][i+1][j] = 1;
             }
@@ -36,11 +56,32 @@ void zoneTravelA(int*** tab){
     }
 }
 
-void zoneTravelUp(int*** tab){
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
+void zoneTravelDownZone2To3(int*** tab){
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            if (tab[2][i][j] == -3) {
+                tab[2][i+1][j] = 1;
+            }
+        }
+    }
+}
+
+void zoneTravelUpZone1To2(int*** tab){
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
             if (tab[1][i][j] == -2) {
-                tab[1][i-1][j] = 1;
+                printf("OKKKK");
+                //tab[1][i-1][j] = 1;
+            }
+        }
+    }
+}
+
+void zoneTravelUpZone2To3(int*** tab){
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            if (tab[2][i][j] == -3) {
+                tab[2][i-1][j] = 1;
             }
         }
     }
