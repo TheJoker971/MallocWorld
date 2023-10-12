@@ -8,6 +8,7 @@
 #include "checkMovement.h"
 #include "zoneTravel.h"
 
+
 int zone = 0;
 int compteur = 1;
 
@@ -15,16 +16,19 @@ void movePlayer(int*** tab, char deplacement){
 
     switch (deplacement) {
         case 'z':
+
             moveUp(tab);
             drawMap(tab);
             break;
 
         case 'q':
+
             moveLeft(tab);
             drawMap(tab);
             break;
 
         case 'd':
+
             moveRight(tab);
             drawMap(tab);
             break;
