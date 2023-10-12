@@ -3,18 +3,7 @@
 #include <string.h>
 #include "map.h"
 
-void moveUp(int** map[]){
-    for(int i =0;i<height;i++){
-        for(int j=0;j<width;j++){
-            if(map[0][i][j] == 1){
-                map[0][i][j] = 0;
-                map[0][i-1][j] = 1;
-            }
-        }
-    }
-}
 void saveMap(int** map[]){
-    moveUp(map);
     FILE* f = fopen("./world.txt","w+");
     while(f != NULL){
         fprintf(f,"=== MAP ===\n");
