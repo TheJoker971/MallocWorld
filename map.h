@@ -1,9 +1,8 @@
 #ifndef MAP_H
 #define MAP_H
 
-#define height  5 
-#define width   5
-#define PIXELS      height * width
+#define height  10
+#define width   10
 
 struct Coordonnee{
     int x;

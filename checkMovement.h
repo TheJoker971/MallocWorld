@@ -4,5 +4,5 @@
 
 #ifndef MALLOCWORLD_CHECKMOVEMENT_H
 #define MALLOCWORLD_CHECKMOVEMENT_H
-void checkMovement(int);
+int checkMovement(int);
 #endif //MALLOCWORLD_CHECKMOVEMENT_H

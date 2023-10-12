@@ -9,16 +9,8 @@ int main(int argc, const char* argv[]){
     
     // Initialisation de la map
     int*** map = initMap();
-
-    //Dessin de la map
-    drawMap(map);
-    // SaveMap
-    saveMap(map);
-    printf("\n");
-    // Chargement de la map
-    int*** map1 = chargeMap();
-    // Affichage des changements
-    drawMap(map1);
+  //Dessin de la map
+    //draw(map);
   //Conditions qui demande à l'utilisateur d'entrer une touche
     char depl = 'A';
     do {
@@ -26,7 +18,7 @@ int main(int argc, const char* argv[]){
         scanf(" %c", &depl);
 
         if (depl == 'z' || depl == 's' || depl == 'q' || depl == 'd') {
-            // Appele de la fonction movePlayer
+            // Appelle de la fonction movePlayer
             movePlayer(map, depl);
         } else {
             printf("Entrée non valide. Veuillez réessayer.\n");
@@ -46,10 +38,10 @@ int main(int argc, const char* argv[]){
 
     showInventaire(p);
     // Libération de la Memoire
-    freeMap(map1);
+    //drawMap(map);
     freeMap(map);
     
-    
-    // showInventaire(p);
+    printf("\n");
+
     return 0;
 }
