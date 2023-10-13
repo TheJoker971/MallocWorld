@@ -7,7 +7,7 @@
 
 int checkMovement(int resultTab){
     char yesNo;
-    int zone = 0;
+    int result = 0;
 
     switch (resultTab) {
         case 12:
@@ -15,6 +15,7 @@ int checkMovement(int resultTab){
             break;
         case -1:
             printf("\n\n\nImpossible de franchir la case\n\n\n");
+            result = 1;
             break;
 
         case 2:
@@ -35,12 +36,12 @@ int checkMovement(int resultTab){
 
         case -2:
             printf("\n\n\nPORTAIL ZONE 2\n\n\n");
-            zone = 2;
+            result = 2;
             break;
 
         case -3:
             printf("\n\n\nPORTAIL ZONE 3\n\n\n");
-            zone = 3;
+            result = 3;
             break;
 
         default:
