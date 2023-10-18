@@ -3,6 +3,7 @@
 //
 #include "checkMovement.h"
 #include <stdio.h>
+#include "movePlayer.h"
 #include <stdlib.h>
 
 int checkMovement(int resultTab){
@@ -48,5 +49,38 @@ int checkMovement(int resultTab){
             printf("\n ERREUR \n");
             break;
     }
-    return zone;
+    return result;
+}
+
+
+int checkCase(int resultTab){
+    char yesNo;
+    int result;
+    switch (resultTab) {
+        case 37:
+            while (yesNo != 'y' && yesNo != 'n') {
+                printf("Vous venez de rencontrer un montre, voulez vous le tuer ? (y/n)\n");
+                scanf(" %c", &yesNo);
+
+                if (yesNo == 'y') {
+                    printf("Monstre tué");
+                    result = 1;
+                } else if (yesNo == 'n'){
+                    printf("Monstre non tué");
+                    result = 0;
+                } else {
+                    printf("Entrée non valide. Veuillez réessayer.\n");
+                }
+            }
+            break;
+        case -1:
+            result = 0;
+            break;
+
+        default:
+            result = 1;
+            break;
+    }
+
+    return result;
 }

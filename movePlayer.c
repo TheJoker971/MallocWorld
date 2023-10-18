@@ -45,7 +45,8 @@ void moveLeft(int*** tab){
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             if (tab[zone][i][j] == 1) {
-                if ( compteur != 0) {
+                int resultTab = tab[zone][i][j - 1];
+                 if (compteur != 0 && checkCase(resultTab) != 0) {
                     moveLeftZone(tab, i, j);
                 } else compteur = 1;
             }
@@ -90,7 +91,8 @@ void moveLeftZone(int*** tab, int i, int j){
 void moveRight(int*** tab){
     for (int i = 0; i < height; i++) {
         for (int j = width; j >=0; j--) {
-            if (tab[zone][i][j] == 1) {
+            int resultTab = tab[zone][i][j+1];
+            if (tab[zone][i][j] == 1 && checkCase(resultTab) != 0) {
                 if ( compteur != 0){
                     moveRightZone(tab, i, j);
                 } else compteur = 1;
@@ -135,7 +137,7 @@ void moveRightZone(int*** tab,int i,int j){
 void moveUp(int*** tab){
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
-            if (tab[zone][i][j] == 1) {
+            if (tab[zone][i][j] == 1 ) {
                 if ( compteur != 0) {
                     moveUpZone(tab, i, j);
                 } else compteur = 1;
@@ -146,9 +148,15 @@ void moveUp(int*** tab){
 
 void moveUpZone(int*** tab,int i,int j){
     if( i > 1){
-        moveUpZoneInside(tab, i, j);
+        int resultTab = tab[zone][i - 1][j];
+        if(checkCase(resultTab) != 0){
+            moveUpZoneInside(tab, i, j);
+        }
     } else{
-        moveUpZoneBorder(tab, i, j);
+        int resultTab = tab[zone][0][j];
+        if(checkCase(resultTab) != 0){
+            moveUpZoneBorder(tab, i, j);
+        }
     }
 }
 
@@ -225,9 +233,15 @@ void moveDown(int*** tab){
 
 void moveDownZone(int*** tab, int i, int j){
         if (i < height - 2){
-            moveDownZoneInside(tab, i, j);
+            int resultTab = tab[zone][i + 1][j];
+            if(checkCase(resultTab) != 0) {
+                moveDownZoneInside(tab, i, j);
+            }
         } else {
-            moveDownZoneBorder(tab, i, j);
+            int resultTab = tab[zone][height - 1][j];
+            if(checkCase(resultTab) != 0) {
+                moveDownZoneBorder(tab, i, j);
+            }
         }
 }
 
