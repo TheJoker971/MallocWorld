@@ -6,6 +6,7 @@
 #define MALLOCWORLD_MOVEPLAYER_H
 void movePlayer(int*** tab, char);
 
+
 void moveLeft(int***);
 void moveLeftZone(int***, int, int);
 
@@ -21,4 +22,5 @@ void moveDown(int***);
 void moveDownZone(int***, int, int);
 void moveDownZoneInside(int***, int, int);
 void moveDownZoneBorder(int***, int, int);
+
 #endif //MALLOCWORLD_MOVEPLAYER_H
