@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "map.h"
 #include "player.h"
-#include "pnj.h"
 #include "movePlayer.h"
 
 int main(int argc, const char* argv[]){
@@ -16,12 +15,6 @@ int main(int argc, const char* argv[]){
     // SaveMap
     saveMap(map);
     printf("\n");
-    // Chargement de la map
-    int*** map1 = chargeMap();
-    // Affichage des changements
-    drawMap(map1);
-    // Libération de la Memoire
-    freeMap(map1);
   //Dessin de la map
     //draw(map);
   //Conditions qui demande à l'utilisateur d'entrer une touche
@@ -40,16 +33,13 @@ int main(int argc, const char* argv[]){
   
     printf("\t-------PLAYER-----------\n");
     // joueur
-    Player p;
-
-    startPlayer(&p);
+    Player p = initPlayer();
     // pnj
-    Pnj pn;
-    stockPnj(&pn);
+    Npc pnj = initNpc();
 
     // show inventaire
 
-    showInventaire(p);
+    showInventory(p);
     // Libération de la Memoire
     //drawMap(map);
     freeMap(map);

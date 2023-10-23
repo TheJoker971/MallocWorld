@@ -1,21 +1,26 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-#include "elements.h"
+#include "object.h"
+#include "npc.h"
 
-struct Player
+
+typedef struct Player
 {
-    int pv; // == hp
-    int niveau;
-    int experience;
-    int max;              // pvmax == hp
-    Elements *inventaire; // inventaire == tab* dimension de Elements
-};
+    int hp;
+    int maxHp;
+    int xp;
+    int level;
+    Object* inventory;
+} Player;
 
-typedef struct Player Player;
+Player initPlayer();
+void initInventory(Object*);
+void showInventory(Player);
+void deleteObject(Object*);
+int addInventory(Object*,Object);
+Object* isInInventory(Object*);
+void storeInChest(Player,Npc);
 
-void startPlayer(Player *);
-void addElements(Player p, Elements e);
-void showInventaire(Player p);
 
-#endif // PLAYER_H
 
+#endif
