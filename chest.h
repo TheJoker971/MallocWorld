@@ -12,6 +12,8 @@ Chest* newObject(Object*);
 void addObject(Chest*,Object*);
 void firstAdd(Chest*,Object*);
 void showChest(Chest*);
-Object* getObject(Chest*,int);
+Chest* getObject(Chest*,int);
+void deleteChain(Chest*,int);
+Object withdrawObject(Chest*);
 
 #endif // CHEST_H

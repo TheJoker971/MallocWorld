@@ -20,7 +20,8 @@ void deleteObject(Object*);
 int addInventory(Object*,Object);
 Object* isInInventory(Object*);
 void storeInChest(Player,Npc);
+void withdrawOfChest(Player p,Npc npc);
 
 
 
-#endif
+#endif // PLAYER_H

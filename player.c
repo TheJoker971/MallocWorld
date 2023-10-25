@@ -59,16 +59,25 @@ int addInventory(Object* inv,Object o){
             if(inv[i].id == 0){
                 inv[i].id = o.id;
                 inv[i].quantity = o.quantity;
+                inv[i].durability = o.durability;
                 break;
+            }else{
+                if (inv[9].quantity == 20)
+                {
+                    printf("\t-----\tInventory blind\t----- \n");
+                    return 0;
+                } 
             }
         }
-    }
-    if (inv[9].quantity == 20)
-    {
-        printf("\t-----\tInventory blind\t----- \n");
-        return 0;
-    }    
+    }   
     return 1;
+}
+
+void withdrawOfChest(Player p,Npc npc){
+    Object o = withdrawObject(npc.chest);
+    if(o.id != 0){
+        addInventory(p.inventory,o);
+    }
 }
 
 
@@ -92,7 +101,6 @@ void storeInChest(Player p, Npc npc){
         if(o->quantity - amount == 0){
             addObject(npc.chest,o);
         }else{
-            printf("On rentre pas!!!\n\n");
             o->quantity -= amount;
             Object add = initObject(o->id,amount,o->durability);
             addObject(npc.chest,&add);
@@ -100,7 +108,6 @@ void storeInChest(Player p, Npc npc){
     }else{
         addObject(npc.chest,o);
     }
-    showChest(npc.chest);
 }
 
 

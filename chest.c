@@ -46,38 +46,82 @@ void addObject(Chest* chest,Object* o){
     }
 }
 
-Object* getObject(Chest* chest,int id){
+Chest* getObject(Chest* chest,int id){
     Chest* c = chest;
     int i = 1;
-    if(id == 1){
-        return &c->object;
+    while(c != NULL){
+        if(i == id && c->object.id != 0){
+            return c;
+        }
+        i++;
+        c = c->next;
+        
+    }
+    return NULL;
+
+}
+
+void deleteChain(Chest* c, int id){
+    Chest* now = getObject(c,id);
+    if(id != 1){
+        Chest* last = getObject(c,id-1);
+        last->next = now->next;
+        free(now);
     }else{
-        while(c != NULL){
-            if(i == id && c->object.id != 0){
-                return &c->object;
-            }
-            i++;
-            c = c->next;
-            
+        if(now->next->object.id <32 && now->next->object.id > 0 ){
+            now->object = now->next->object;
+        }
+        if(now->next != NULL){
+            now->next = now->next->next;
+        }
+        
+    }
+}
+
+Object withdrawObject(Chest* c){
+    Chest* chain = NULL;
+    Object ob;
+    int id = 0;
+    do{
+        printf("Enter position of the Object you would like withdraw of the chest : \n");
+        scanf("%d",&id);
+        chain = getObject(c,id);
+    }while(chain == NULL);
+    if(chain->object.quantity == 1){
+        ob = initObject(chain->object.id,chain->object.quantity,chain->object.durability);
+        deleteChain(c,id);
+    }else{
+        int amount = 0;
+        do{
+            printf("Enter position of the Object you would like withdraw of the chest : \n");
+            scanf("%d",&amount);
+        }while(amount == 0 && amount >chain->object.quantity);
+        if(chain->object.quantity - amount > 0){
+            chain->object.quantity -= amount;
+            ob = initObject(chain->object.id,amount,chain->object.durability);
+        }else{
+            ob = initObject(chain->object.id,chain->object.quantity,chain->object.durability);
+            deleteChain(c,id);
         }
     }
-
+    return ob;
 }
 
 void showChest(Chest* chest){
     Chest* c = chest;
-    printf("---------------\t CHEST\t---------------\n");
-    printf("|\tID\t|\t quantity\t|\n");
-    printf("-----------------------------------------\n");
+    printf("--------------------\t CHEST\t--------------------\n");
+    printf("|\tID\t|\tObject\t|\tQuantity\t |\n");
+    printf("----------------------------------------------------------\n");
+    int i = 1;
     do{
         if(c->object.id != 0){
-            printf("|\t%02d\t|\t%02d (%02d) \t|\n",c->object.id,c->object.quantity,c->object.durability);
+            printf("|\t%d\t|\t%d\t|\t %02d (%02d) \t |\n",i,c->object.id,c->object.quantity,c->object.durability);
         }
         else if(c->object.id == 0 && c->next == NULL){
-            printf("|\t  \t|\t        \t|\n");
+            printf("|\t \t|\t \t|\t          \t |\n",i+1);
         }
-        
+        i++;
         c = c->next;
     }while(c != NULL);
-    printf("-----------------------------------------\n");
+    printf("----------------------------------------------------------\n");
 }
