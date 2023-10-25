@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "map.h"
 #include "player.h"
-#include "pnj.h"
+#include "npc.h"
 #include "movePlayer.h"
 #include "monsters.h"
 
@@ -25,7 +25,7 @@ int main(int argc, const char* argv[]){
         }
     } while (1);
 
-    printf("\t-------PLAYER-----------\n");
+    /*printf("\t-------PLAYER-----------\n");
     // joueur
     Player p;
 
@@ -41,7 +41,7 @@ int main(int argc, const char* argv[]){
     //drawMap(map);
     freeMap(map);
     
-    printf("\n");
+    printf("\n");*/
 
     return 0;
 }
