@@ -118,7 +118,7 @@ void showChest(Chest* chest){
             printf("|\t%d\t|\t%d\t|\t %02d (%02d) \t |\n",i,c->object.id,c->object.quantity,c->object.durability);
         }
         else if(c->object.id == 0 && c->next == NULL){
-            printf("|\t \t|\t \t|\t          \t |\n",i+1);
+            printf("|\t \t|\t \t|\t          \t |\n");
         }
         i++;
         c = c->next;
