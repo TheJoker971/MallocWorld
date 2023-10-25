@@ -4,9 +4,9 @@
 #include "player.h"
 #include "pnj.h"
 #include "movePlayer.h"
+#include "monsters.h"
 
 int main(int argc, const char* argv[]){
-    
     // Initialisation de la map
     int*** map = initMap();
   //Dessin de la map
@@ -24,7 +24,7 @@ int main(int argc, const char* argv[]){
             printf("Entrée non valide. Veuillez réessayer.\n");
         }
     } while (1);
-  
+
     printf("\t-------PLAYER-----------\n");
     // joueur
     Player p;

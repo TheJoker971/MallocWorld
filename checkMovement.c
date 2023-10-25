@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include "movePlayer.h"
 #include <stdlib.h>
+#include "monsters.h"
 
 int checkMovement(int resultTab){
     char yesNo;
@@ -56,6 +57,11 @@ int checkMovement(int resultTab){
 int checkCase(int resultTab){
     char yesNo;
     int result;
+
+    if (resultTab >= 12 && resultTab <= 98){
+        initMonster(resultTab);
+    }
+
     switch (resultTab) {
         case 37:
             while (yesNo != 'y' && yesNo != 'n') {
@@ -73,6 +79,15 @@ int checkCase(int resultTab){
                 }
             }
             break;
+
+        case 51:
+            initMonster(resultTab);
+            break;
+
+        case 17:
+            initMonster(resultTab);
+            break;
+
         case -1:
             result = 0;
             break;
