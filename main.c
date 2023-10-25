@@ -1,50 +1,41 @@
+#include "player.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "map.h"
-#include "player.h"
-#include "movePlayer.h"
 
-int main(int argc, const char* argv[]){
-    
-    // Initialisation de la map
-    int*** map = initMap();
-
-
-    //Dessin de la map
-    drawMap(map);
-    // SaveMap
-    saveMap(map);
-    printf("\n");
-  //Dessin de la map
-    //draw(map);
-  //Conditions qui demande à l'utilisateur d'entrer une touche
-    char depl = 'A';
-    do {
-        printf("Entrer un truc : ");
-        scanf(" %c", &depl);
-
-        if (depl == 'z' || depl == 's' || depl == 'q' || depl == 'd') {
-            // Appelle de la fonction movePlayer
-            movePlayer(map, depl);
-        } else {
-            printf("Entrée non valide. Veuillez réessayer.\n");
-        }
-    } while (1);
-  
-    printf("\t-------PLAYER-----------\n");
-    // joueur
+int main(int argc, char* argv[]){
+    // Initialisation of the npc and the player
+    Npc npc = initNpc();
     Player p = initPlayer();
-    // pnj
-    Npc pnj = initNpc();
-
-    // show inventaire
-
+    //-----------------------------------------------
+    // Creation of the Object Tests
+    Object first = initObject(5,5,0);
+    Object second = initObject(6,6,0);
+    Object third = initObject(6,20,0);
+    Object fourth = initObject(6,20,0);
+    //-----------------------------------------------
+    // Add these Object in the player inventory and npc chest
+    //addObject(npc.chest,&first);
+    addObject(npc.chest,&second);
+    addInventory(p.inventory,third);
+    addInventory(p.inventory,fourth);
+    addObject(npc.chest,&third);
+    // Show the chest
+    printf("Affichage du coffre avant l'ajout de l'element du player\n");
+    showChest(npc.chest);
+    //--------------------------------------------------
+    //-----------------------------------------------------------
+    // Calling function store in chest to get an object of the player inventory on the chest
+    storeInChest(p,npc);
+    //-------------------------------------------------
+    // Show the chest
+    printf("Affichage du coffre apres l'ajout de l'element du player\n");
+    showChest(npc.chest);
+    withdrawOfChest(p,npc);
+    showChest(npc.chest);
+    //--------------------------------------------------
+    // Show inventory of the player after transaction
+    printf("Affichage de l'inventaire apres l'ajout de l'element du player dans le coffre\n");
     showInventory(p);
-    // Libération de la Memoire
-    //drawMap(map);
-    freeMap(map);
-    
-    printf("\n");
-
+    //----------------------------------------------------
     return 0;
 }
