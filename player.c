@@ -15,14 +15,9 @@ Player initPlayer(){
 void initInventory(Object* tab){
     for(int i = 0;i < 10;i++){
         if(i<4){
-            tab[i].id = i+1;
-            tab[i].durability = 10;
-            tab[i].quantity = 1;
+            tab[i] = initObject(i+1,2);
         }else{
-            tab[i].id = 0;
-            tab[i].durability = 0;
-            tab[i].quantity = 0;
-            // tab[i] = NULL;
+            tab[i] = blankObject();
         }
     }
 }
@@ -102,12 +97,25 @@ void storeInChest(Player p, Npc npc){
             addObject(npc.chest,o);
         }else{
             o->quantity -= amount;
-            Object add = initObject(o->id,amount,o->durability);
+            Object add = initObject(o->id,amount);
             addObject(npc.chest,&add);
         }
     }else{
         addObject(npc.chest,o);
     }
 }
+
+void withdrawInventory(Player p, Object o){
+    Object* inv = p.inventory;
+    for(int i =9;i>-1;i--){
+        if(inv[i].id == o.id && inv[i].quantity >= o.quantity){
+            inv[i].quantity -= o.quantity;
+            if(inv[i].quantity == 0){
+                resetObject(&inv[i]);
+            }
+        }
+    }    
+}
+
 
 

@@ -9,7 +9,8 @@ typedef struct Npc{
 }Npc;
 
 Npc initNpc();
-void wichCraft(Craft*,Object*);
+void canCraft(Craft*,Object*);
 int haveComponent(Object*, Object* );
 int isInInventory(Object,Object*);
+void repair(Object*);
 #endif // NPC_H

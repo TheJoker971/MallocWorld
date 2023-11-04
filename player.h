@@ -18,10 +18,10 @@ void initInventory(Object*);
 void showInventory(Player);
 void deleteObject(Object*);
 int addInventory(Object*,Object);
-Object* isInInventory(Object*);
 void storeInChest(Player,Npc);
 void withdrawOfChest(Player p,Npc npc);
+void withdrawInventory(Player, Object);
 
 
 
-#endif // PLAYER_H
+#endif

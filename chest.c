@@ -11,7 +11,7 @@ Chest* initChest(){
 
 Chest* newObject(Object* o){
     Chest* c = malloc(sizeof(Chest));
-    c->object = initObject(o->id,o->quantity,o->durability);
+    c->object = initObject(o->id,o->quantity);
     c->next = NULL;
     resetObject(o);
     return c;
@@ -21,7 +21,7 @@ Chest* newObject(Object* o){
 void addObject(Chest* chest,Object* o){
     Chest* c = chest; 
     if(c->object.id == 0){
-        c->object = initObject(o->id,o->quantity,o->durability);
+        c->object = initObject(o->id,o->quantity);
         resetObject(o);
     }else{
         while(c != NULL){
@@ -88,7 +88,7 @@ Object withdrawObject(Chest* c){
         chain = getObject(c,id);
     }while(chain == NULL);
     if(chain->object.quantity == 1){
-        ob = initObject(chain->object.id,chain->object.quantity,chain->object.durability);
+        ob = initObject(chain->object.id,chain->object.quantity);
         deleteChain(c,id);
     }else{
         int amount = 0;
@@ -98,9 +98,9 @@ Object withdrawObject(Chest* c){
         }while(amount == 0 && amount >chain->object.quantity);
         if(chain->object.quantity - amount > 0){
             chain->object.quantity -= amount;
-            ob = initObject(chain->object.id,amount,chain->object.durability);
+            ob = initObject(chain->object.id,amount);
         }else{
-            ob = initObject(chain->object.id,chain->object.quantity,chain->object.durability);
+            ob = initObject(chain->object.id,chain->object.quantity);
             deleteChain(c,id);
         }
     }
@@ -118,7 +118,7 @@ void showChest(Chest* chest){
             printf("|\t%d\t|\t%d\t|\t %02d (%02d) \t |\n",i,c->object.id,c->object.quantity,c->object.durability);
         }
         else if(c->object.id == 0 && c->next == NULL){
-            printf("|\t \t|\t \t|\t          \t |\n");
+            printf("|\t \t|\t \t|\t          \t |\n",i+1);
         }
         i++;
         c = c->next;

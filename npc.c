@@ -9,12 +9,12 @@ Npc initNpc(){
     return npc;
 }
 
-void wichCraft(Craft* c,Object* p){
+void canCraft(Craft* c,Object* p){
     printf("You can craft these Object : \n");
     printf("---------------------------------\n");
     printf("|\tID\t|\tObject\t|\n");
     printf("---------------------------------\n");
-    for(int i =0;i<22;i++){
+    for(int i =0;i<25;i++){
         if(haveComponent(c[i].composent,p)){
             printf("|\t%d\t|\t%d\t|\n",i+1,c[i].id);
         }
@@ -40,9 +40,17 @@ int isInInventory(Object o,Object* inv){
         if(o.id == inv[i].id && inv[i].quantity >= o.quantity ){
             return 1;
         }
-        if(o.id == 0){
+        else if(o.id == 0){
             return 1;
         }
     }
     return 0;
+}
+
+void repair(Object* inv){
+    for(int i =0;i<10;i++){
+        if(isWeapon(inv[i].id) || isTools(inv[i].id)){
+            inv[i] = initObject(inv[i].id,1);
+        }
+    }
 }
