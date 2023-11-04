@@ -4,7 +4,45 @@
 
 Npc initNpc(){
     Npc npc;
-    npc.crafts = malloc(sizeof(Craft)*30);
+    npc.crafts = initCraft();
     npc.chest = initChest();
     return npc;
+}
+
+void wichCraft(Craft* c,Object* p){
+    printf("You can craft these Object : \n");
+    printf("---------------------------------\n");
+    printf("|\tID\t|\tObject\t|\n");
+    printf("---------------------------------\n");
+    for(int i =0;i<22;i++){
+        if(haveComponent(c[i].composent,p)){
+            printf("|\t%d\t|\t%d\t|\n",i+1,c[i].id);
+        }
+    }
+    printf("---------------------------------\n");
+}
+
+int haveComponent(Object* o, Object* inv){
+    int count = 0;
+    for(int i = 0;i<2;i++){
+        if(isInInventory(o[i],inv)){
+            count++;
+        }
+    }
+    if(count == 2){
+        return 1;
+    }
+    return 0;
+}
+
+int isInInventory(Object o,Object* inv){
+    for(int i =0;i<10;i++){
+        if(o.id == inv[i].id && inv[i].quantity >= o.quantity ){
+            return 1;
+        }
+        if(o.id == 0){
+            return 1;
+        }
+    }
+    return 0;
 }

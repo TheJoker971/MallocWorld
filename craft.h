@@ -7,4 +7,14 @@ typedef struct Craft{
     Object* composent;
 }Craft;
 
+Craft* initCraft();
+Object* crafting(int);
+Object* armorCraft(int);
+Object* healthCraft(int);
+Object* swordCraft(int);
+Object* toolCraft(int);
+Object* lanceCraft(int);
+Object* hammerCraft(int);
+void showCraft(Craft* c);
+
 #endif // CRAFT_H
