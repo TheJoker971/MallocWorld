@@ -8,34 +8,30 @@ int main(int argc, char* argv[]){
     Player p = initPlayer();
     //-----------------------------------------------
     // Creation of the Object Tests
-    Object first = initObject(5,5,0);
-    Object second = initObject(6,6,0);
-    Object third = initObject(6,20,0);
-    Object fourth = initObject(6,20,0);
+    // Object first = initObject(5,5);
+    // Object second = initObject(6,6);
+    // Object third = initObject(6,20);
+    // Object fourth = initObject(17,20);
     //-----------------------------------------------
     // Add these Object in the player inventory and npc chest
     //addObject(npc.chest,&first);
-    addObject(npc.chest,&second);
-    addInventory(p.inventory,third);
-    addInventory(p.inventory,fourth);
-    addObject(npc.chest,&third);
-    // Show the chest
-    printf("Affichage du coffre avant l'ajout de l'element du player\n");
-    showChest(npc.chest);
-    //--------------------------------------------------
-    //-----------------------------------------------------------
-    // Calling function store in chest to get an object of the player inventory on the chest
-    storeInChest(p,npc);
-    //-------------------------------------------------
-    // Show the chest
-    printf("Affichage du coffre apres l'ajout de l'element du player\n");
-    showChest(npc.chest);
-    withdrawOfChest(p,npc);
-    showChest(npc.chest);
-    //--------------------------------------------------
-    // Show inventory of the player after transaction
-    printf("Affichage de l'inventaire apres l'ajout de l'element du player dans le coffre\n");
+    
+    addInventory(p.inventory,initObject(17,20));
+    addInventory(p.inventory,initObject(6,20));
+    addInventory(p.inventory,initObject(5,20));
+    addInventory(p.inventory,initObject(17,20));
+    addInventory(p.inventory,initObject(18,20));
+    addInventory(p.inventory,initObject(33,20));
+    p.inventory[0].durability-=5;
+    p.inventory[2].durability-=3;
     showInventory(p);
-    //----------------------------------------------------
+    //repair(p.inventory);
+    //withdrawInventory(p,initObject(6,6));
+    craftObject(npc.crafts,p);
+    showInventory(p);
+    //showCraft(npc.crafts);
+    //canCraft(npc.crafts,p.inventory);
+    // Show the chest
+    
     return 0;
 }

@@ -86,7 +86,7 @@ int isHealth(int id){
 
 int isTools(int id){
     int ids[] = {2,3,4,12,13,14,23,24,25};
-    for(int i =0;i<3;i++){
+    for(int i =0;i<9;i++){
         if(id == ids[i]){
             return 1;
         }

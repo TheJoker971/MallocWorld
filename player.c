@@ -44,7 +44,7 @@ int addInventory(Object* inv,Object o){
         if(stackable(&inv[i],&o)){
             if(inv[i].quantity + o.quantity <= 20){
                 inv[i].quantity += o.quantity;
-                break;
+                return 1;
             }else if(inv[i].quantity + o.quantity < 40){
                 o.quantity = (inv[i].quantity + o.quantity) % 20;
                 inv[i].quantity = 20;
@@ -55,17 +55,12 @@ int addInventory(Object* inv,Object o){
                 inv[i].id = o.id;
                 inv[i].quantity = o.quantity;
                 inv[i].durability = o.durability;
-                break;
-            }else{
-                if (inv[9].quantity == 20)
-                {
-                    printf("\t-----\tInventory blind\t----- \n");
-                    return 0;
-                } 
+                return 1;
             }
         }
     }   
-    return 1;
+    printf("Impossible your inventory is blind!\n");
+    return 0;
 }
 
 void withdrawOfChest(Player p,Npc npc){
@@ -115,6 +110,24 @@ void withdrawInventory(Player p, Object o){
             }
         }
     }    
+}
+
+void craftObject(Craft* c,Player p){
+    canCraft(c,p.inventory);
+    int id = -1;
+    do{
+        printf("Please enter the id of the item you want craft : ");
+        scanf("%d",&id);
+    }while(id == -1 && !haveComponent(c[id-1].composent,p.inventory));
+    for(int i =0;i<2;i++){
+        withdrawInventory(p,c[id-1].composent[i]);
+    }
+    Object o;
+    if(!addInventory(p.inventory,initObject(c[id-1].id,1))){
+        for(int i =0;i<2;i++){
+            addInventory(p.inventory,c[id-1].composent[i]);
+        }
+    }
 }
 
 
