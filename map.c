@@ -4,7 +4,14 @@
 #include "map.h"
 
 void saveMap(int** map[]){
-    FILE* f = fopen("./world.txt","w+");
+    char name[10];
+    char path[]="./saves/";
+    printf("Entrer le nom de la sauvegarde : ");
+    scanf("%s",&name);
+    getchar();
+    strcat(name,".txt");
+    strcat(path,name);
+    FILE* f = fopen(path,"w+");
     while(f != NULL){
         fprintf(f,"=== MAP ===\n");
         for(int i=0;i<3;i++){
@@ -227,7 +234,7 @@ void drawInFile(FILE* f,int** map){
 }
 
 void preSaveMap(int** map[]){
-    FILE* file = fopen("./presave.txt","w+");
+    FILE* file = fopen("./saves/presave.txt","w+");
     while(file != NULL){
         fprintf(file,"=== MAP ===\n");
         for(int i=0;i<3;i++){
@@ -292,7 +299,7 @@ int*** chargeMap(char name[]){
 }
 
 void reloadMap(int** map[]){
-    int*** presave= chargeMap("presave.txt");
+    int*** presave= chargeMap("./saves/presave.txt");
     for(int z = 0;z<3;z++){
         for(int h=0;h<height;h++){
             for(int w=0;w<width;w++){
