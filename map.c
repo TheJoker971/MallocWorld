@@ -247,8 +247,7 @@ void preSaveMap(int** map[]){
     }
 }
 
-void chargePart(int n,int** part){
-    FILE* f = fopen("world.txt","r");
+void chargePart(int n,int** part,FILE* file){
     int jump = 0;
     switch (n)
     {
@@ -264,7 +263,7 @@ void chargePart(int n,int** part){
         break;
     }
     do{
-        char c = getc(f);
+        char c = getc(file);
         if(c == '\n'){
             jump--;
         }
@@ -273,20 +272,37 @@ void chargePart(int n,int** part){
     for(int i =0;i<height;i++){
         for(int j =0;j<width;j++){
             if(j == width-1){
-               fscanf(f,"%d\n",&part[i][j]);
+               fscanf(file,"%d\n",&part[i][j]);
             }else{
-                fscanf(f,"%d ",&part[i][j]);
+                fscanf(file,"%d ",&part[i][j]);
             }
         }
     }
-    fclose(f);
+    fclose(file);
 }
 
-int*** chargeMap(){
+int*** chargeMap(char name[]){
     int*** map = malloc(sizeof(int**)*3);
     for(int i =0;i<3;i++){
         map[i] = allowMemory();
-        chargePart(i,map[i]);
+        FILE* file = fopen(name,"r");
+        chargePart(i,map[i],file);
     }
     return map;
+}
+
+void reloadMap(int** map[]){
+    int*** presave= chargeMap("presave.txt");
+    for(int z = 0;z<3;z++){
+        for(int h=0;h<height;h++){
+            for(int w=0;w<width;w++){
+                if(presave[z][h][w] != map[z][h][w] && map[z][h][w]==0 && presave[z][h][w]!=1){
+                    map[z][h][w] = presave[z][h][w];
+                }
+                if(presave[z][h][w] != map[z][h][w] && presave[z][h][w] ==1){
+                    map[z][h][w] = 0;
+                }
+            }
+        }
+    }
 }
