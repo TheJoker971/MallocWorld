@@ -14,7 +14,6 @@ Craft* initCraft(){
             }
         }
     }
-    printf("%d\n",count);
     return c;
 }
 
