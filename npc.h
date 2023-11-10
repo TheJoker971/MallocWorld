@@ -1,4 +1,4 @@
-/*#ifndef NPC_H
+#ifndef NPC_H
 #define NPC_H
 #include "craft.h"
 #include "chest.h"
@@ -10,4 +10,4 @@ typedef struct Npc{
 }Npc;
 
 Npc initNpc();
-#endif // NPC_H*/
+#endif // NPC_H

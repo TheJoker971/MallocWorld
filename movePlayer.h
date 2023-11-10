@@ -4,22 +4,23 @@
 
 #ifndef MALLOCWORLD_MOVEPLAYER_H
 #define MALLOCWORLD_MOVEPLAYER_H
-void movePlayer(int*** tab, char);
+#include "player.h"
+void movePlayer(int*** tab, char, Player p);
 
 
-void moveLeft(int***);
+void moveLeft(int***, Player p);
 void moveLeftZone(int***, int, int);
 
-void moveRight(int***);
+void moveRight(int***, Player p);
 void moveRightZone(int***,int,int);
 
-void moveUp(int***);
-void moveUpZone(int***,int,int);
+void moveUp(int***, Player p);
+void moveUpZone(int***,int,int, Player p);
 void moveUpZoneInside(int***, int, int);
 void moveUpZoneBorder(int***, int, int);
 
-void moveDown(int***);
-void moveDownZone(int***, int, int);
+void moveDown(int***, Player p);
+void moveDownZone(int***, int, int, Player p);
 void moveDownZoneInside(int***, int, int);
 void moveDownZoneBorder(int***, int, int);
 

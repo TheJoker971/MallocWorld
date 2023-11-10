@@ -4,7 +4,7 @@
 #include "map.h"
 
 void saveMap(int** map[]){
-    moveUp(map);
+    //moveUp(map);
     FILE* f = fopen("./world.txt","w+");
     while(f != NULL){
         fprintf(f,"=== MAP ===\n");

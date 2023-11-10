@@ -13,7 +13,7 @@ struct Coordonnee{
 typedef struct Coordonnee Coordonnee;
 
 
-void moveUp(int**[]);
+//void moveUp(int**[]);
 int*** initMap();
 int** initPart(int);
 int** allowMemory();

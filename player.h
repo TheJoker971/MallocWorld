@@ -1,4 +1,4 @@
-/*#ifndef PLAYER_H
+#ifndef PLAYER_H
 #define PLAYER_H
 #include "object.h"
 #include "npc.h"
@@ -20,8 +20,9 @@ void deleteObject(Object*);
 int addInventory(Object*,Object);
 Object* isInInventory(Object*);
 void storeInChest(Player,Npc);
+void withdrawOfChest(Player p,Npc npc);
+void initSauvegarderHP(Player *p);
+void showWeaponsInInventory(Player *p);
+#endif // PLAYER_H
 
-
-
-#endif*/
 

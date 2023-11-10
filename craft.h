@@ -1,4 +1,4 @@
-/*#ifndef CRAFT_H
+#ifndef CRAFT_H
 #define CRAFT_H
 #include "object.h"
 
@@ -7,4 +7,4 @@ typedef struct Craft{
     Object* composent;
 }Craft;
 
-#endif // CRAFT_H*/
+#endif // CRAFT_H

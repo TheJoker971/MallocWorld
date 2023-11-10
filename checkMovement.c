@@ -54,15 +54,22 @@ int checkMovement(int resultTab){
 }
 
 
-int checkCase(int resultTab){
+int checkCase(int resultTab, Player player){
     char yesNo;
     int result;
 
     if (resultTab >= 12 && resultTab <= 98){
-        initMonster(resultTab);
+        result = initMonster(resultTab, player);
+    } else if ( resultTab == -1) {
+        result = 0;
+    } else if ( resultTab == -2) {
+        result = portailOpenClose1(result);
+    } else if ( resultTab == -3) {
+        result = portailOpenClose2(result);
+    } else {
+        result = 1;
     }
-
-    switch (resultTab) {
+    /*switch (resultTab) {
         case 37:
             while (yesNo != 'y' && yesNo != 'n') {
                 printf("Vous venez de rencontrer un montre, voulez vous le tuer ? (y/n)\n");
@@ -81,11 +88,11 @@ int checkCase(int resultTab){
             break;
 
         case 51:
-            initMonster(resultTab);
+            initMonster(resultTab, player);
             break;
 
         case 17:
-            initMonster(resultTab);
+            initMonster(resultTab, player);
             break;
 
         case -1:
@@ -95,7 +102,25 @@ int checkCase(int resultTab){
         default:
             result = 1;
             break;
-    }
+    }*/
 
     return result;
+}
+
+int portailOpenClose1(int result){
+    if(myLevel() >= 3){
+            result = 1;
+        } else {
+            result = 0;
+        }
+        return result;
+}
+
+int portailOpenClose2(int result){
+    if(myLevel() >= 7){
+            result = 1;
+        } else {
+            result = 0;
+        }
+        return result;
 }

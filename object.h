@@ -1,14 +1,15 @@
-/*#ifndef OBJECT_H
+#ifndef OBJECT_H
 #define OBJECT_H
 
 typedef struct Object
 {
     int id;
     int durability;
+    int degats;
     int quantity;
 } Object;
 
-Object initObject(int,int,int);
+Object initObject(int,int,int,int);
 Object blankObject();
 int stackable(Object*,Object*);
 int isWeapon(int);
@@ -19,4 +20,4 @@ Object plant(int,int);
 Object lance(int);
 void resetObject(Object*);
 
-#endif  //OBJECT_H*/
+#endif  //OBJECT_H
