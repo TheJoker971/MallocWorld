@@ -181,7 +181,7 @@ void attaque(Player *p, Monster *monster){
         chargerHPSauvegarde(p);
         printf("Tu attaque !\n");
         monster->pv -= degat;
-        p->hp = p->hp - 20; // Le monstre inflige 5 points de dégâts au joueur
+        p->hp = p->hp - monster->experience; // Le monstre inflige 5 points de dégâts au joueur
         p->inventory[weapon].durability -= 1;
         printf("Il contre-attaque !\n");
         afficherPointAttaque(p, monster);
