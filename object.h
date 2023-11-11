@@ -26,4 +26,5 @@ Object tool(int);
 Object armor(int);
 Object health(int);
 
+
 #endif  //OBJECT_H

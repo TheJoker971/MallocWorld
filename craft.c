@@ -181,3 +181,4 @@ void showCraft(Craft* c){
         printf("\n");
     }
 }
+

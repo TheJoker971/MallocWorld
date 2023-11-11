@@ -55,7 +55,6 @@ Chest* getObject(Chest* chest,int id){
         }
         i++;
         c = c->next;
-        
     }
     return NULL;
 
@@ -74,7 +73,6 @@ void deleteChain(Chest* c, int id){
         if(now->next != NULL){
             now->next = now->next->next;
         }
-        
     }
 }
 

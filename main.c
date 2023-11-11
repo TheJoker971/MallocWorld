@@ -1,38 +1,53 @@
-#include "player.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include "map.h"
+#include "player.h"
+#include "npc.h"
+#include "movePlayer.h"
+#include "monsters.h"
 
-int main(int argc, char* argv[]){
-    // Initialisation of the npc and the player
+int main(int argc, const char* argv[]){
+    // Initialisation de la map, du npc et du joueur
+    int*** map = initMap();
     Npc npc = initNpc();
     Player p = initPlayer();
-    //-----------------------------------------------
-    // Creation of the Object Tests
-    // Object first = initObject(5,5);
-    // Object second = initObject(6,6);
-    // Object third = initObject(6,20);
-    // Object fourth = initObject(17,20);
-    //-----------------------------------------------
-    // Add these Object in the player inventory and npc chest
-    //addObject(npc.chest,&first);
-    
-    addInventory(p.inventory,initObject(17,20));
-    addInventory(p.inventory,initObject(6,20));
-    addInventory(p.inventory,initObject(5,20));
-    addInventory(p.inventory,initObject(17,20));
-    addInventory(p.inventory,initObject(18,20));
-    addInventory(p.inventory,initObject(33,20));
-    p.inventory[0].durability-=5;
-    p.inventory[2].durability-=3;
-    showInventory(p);
-    //repair(p.inventory);
-    //withdrawInventory(p,initObject(6,6));
-    craftObject(npc.crafts,p);
-    showInventory(p);
-    //showCraft(npc.crafts);
-    //canCraft(npc.crafts,p.inventory);
-    // Show the chest
-    savePlayer(p,npc.chest);
-    
+
+    // Autres initialisations...
+
+    char startCommand[10];
+    printf("Tapez 'start' pour commencer le jeu : ");
+    scanf("%s", startCommand);
+
+    if (strcmp(startCommand, "start") == 0) {
+        int gameRunning = 1;
+        while (gameRunning && p.hp > 0) {
+            char depl;
+            printf("Entrer un truc : ");
+            scanf(" %c", &depl);
+
+            if (depl == 'z' || depl == 's' || depl == 'q' || depl == 'd') {
+                movePlayer(map, depl, p);
+                
+            } else {
+                printf("Entrée non valide. Veuillez réessayer.\n");
+            }
+
+            // Vérifier si le joueur est mort
+            if (p.hp <= 0) {
+                printf("Game Over. Le joueur est mort.\n");
+                gameRunning = 0;
+            }
+
+            // Autres conditions pour arrêter le jeu...
+        }
+    } else {
+        printf("Commande non reconnue. Le jeu ne démarre pas.\n");
+    }
+
+    // Nettoyage et libération des ressources
+    freeMap(map);
+
     return 0;
 }
+

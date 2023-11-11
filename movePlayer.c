@@ -12,29 +12,26 @@
 int zone = 0;
 int compteur = 1;
 
-void movePlayer(int*** tab, char deplacement){
+void movePlayer(int*** tab, char deplacement, Player player){
 
     switch (deplacement) {
         case 'z':
-
-            moveUp(tab);
+            moveUp(tab, player);
             drawMap(tab);
             break;
 
         case 'q':
-
-            moveLeft(tab);
+            moveLeft(tab, player);
             drawMap(tab);
             break;
 
         case 'd':
-
-            moveRight(tab);
+            moveRight(tab, player);
             drawMap(tab);
             break;
 
         case 's':
-            moveDown(tab);
+            moveDown(tab, player);
             drawMap(tab);
             break;
 
@@ -45,11 +42,12 @@ void movePlayer(int*** tab, char deplacement){
 }
 
 //TOUS LES DÉPLACEMENT VERS LA GAUCHE
-void moveLeft(int*** tab){
+void moveLeft(int*** tab, Player p){
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             if (tab[zone][i][j] == 1) {
-                if ( compteur != 0) {
+                int resultTab = tab[zone][i][j - 1];
+                 if (compteur != 0 && checkCase(resultTab, p) != 0) {
                     moveLeftZone(tab, i, j);
                 } else compteur = 1;
             }
@@ -91,10 +89,11 @@ void moveLeftZone(int*** tab, int i, int j){
 }
 
 //TOUS LES DÉPLACEMENT VERS LA DROITE
-void moveRight(int*** tab){
+void moveRight(int*** tab, Player p){
     for (int i = 0; i < height; i++) {
         for (int j = width; j >=0; j--) {
-            if (tab[zone][i][j] == 1) {
+            int resultTab = tab[zone][i][j+1];
+            if (tab[zone][i][j] == 1 && checkCase(resultTab, p) != 0) {
                 if ( compteur != 0){
                     moveRightZone(tab, i, j);
                 } else compteur = 1;
@@ -136,23 +135,29 @@ void moveRightZone(int*** tab,int i,int j){
 
 
 //TOUS LES DÉPLACEMENT VERS LE HAUT
-void moveUp(int*** tab){
+void moveUp(int*** tab, Player p){
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
-            if (tab[zone][i][j] == 1) {
+            if (tab[zone][i][j] == 1 ) {
                 if ( compteur != 0) {
-                    moveUpZone(tab, i, j);
+                    moveUpZone(tab, i, j, p);
                 } else compteur = 1;
             }
         }
     }
 }
 
-void moveUpZone(int*** tab,int i,int j){
+void moveUpZone(int*** tab,int i,int j, Player p){
     if( i > 1){
-        moveUpZoneInside(tab, i, j);
+        int resultTab = tab[zone][i - 1][j];
+        if(checkCase(resultTab, p) != 0){
+            moveUpZoneInside(tab, i, j);
+        }
     } else{
-        moveUpZoneBorder(tab, i, j);
+        int resultTab = tab[zone][0][j];
+        if(checkCase(resultTab, p) != 0){
+            moveUpZoneBorder(tab, i, j);
+        }
     }
 }
 
@@ -215,23 +220,29 @@ void moveUpZoneBorder (int*** tab, int i, int j){
 
 
 // TOUS LES DÉPLACEMENTS VERS LE BAS
-void moveDown(int*** tab){
+void moveDown(int*** tab, Player p){
     for (int i = height-1; i >= 0; i--) {
         for (int j = 0; j < width; j++) {
             if (tab[zone][i][j] == 1 ) {
                 if ( compteur != 0){
-                    moveDownZone(tab, i, j);
+                    moveDownZone(tab, i, j, p);
                 } else compteur = 1;
             }
         }
     }
 }
 
-void moveDownZone(int*** tab, int i, int j){
+void moveDownZone(int*** tab, int i, int j, Player p){
         if (i < height - 2){
-            moveDownZoneInside(tab, i, j);
+            int resultTab = tab[zone][i + 1][j];
+            if(checkCase(resultTab, p) != 0) {
+                moveDownZoneInside(tab, i, j);
+            }
         } else {
-            moveDownZoneBorder(tab, i, j);
+            int resultTab = tab[zone][height - 1][j];
+            if(checkCase(resultTab, p) != 0) {
+                moveDownZoneBorder(tab, i, j);
+            }
         }
 }
 

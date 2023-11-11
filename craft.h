@@ -18,3 +18,4 @@ Object* hammerCraft(int);
 void showCraft(Craft* c);
 
 #endif // CRAFT_H
+

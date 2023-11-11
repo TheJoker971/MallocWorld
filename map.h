@@ -6,7 +6,6 @@
 #define width   10
 #define PIXELS      height * width
 
-
 struct Coordonnee{
     int x;
     int y;
@@ -15,7 +14,7 @@ struct Coordonnee{
 typedef struct Coordonnee Coordonnee;
 
 
-void moveUp(int**[]);
+//void moveUp(int**[]);
 int*** initMap();
 int** initPart(int);
 int** allowMemory();
@@ -37,8 +36,10 @@ void preSaveMap(int**[]);
 void drawInFile(FILE*,int**);
 int percent();
 void saveMap(int** []);
-int*** chargeMap();
-void chargePart(int,int**);
+int*** chargeMap(char[]);
+void chargePart(int,int**,FILE*);
+void reloadMap(int** []);
+
 
 
 #endif // MAP_H

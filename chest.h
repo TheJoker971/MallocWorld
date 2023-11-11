@@ -17,4 +17,5 @@ void deleteChain(Chest*,int);
 Object withdrawObject(Chest*);
 void freeChest(Chest*);
 
+
 #endif // CHEST_H

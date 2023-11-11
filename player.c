@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 Player initPlayer(){
     Player p;
     p.hp = 100;
@@ -37,7 +38,6 @@ void showInventory(Player p){
         }else{
             printf("|\t%d\t|\t/\t|\t empty    \t |\n",i+1);
         }
-        
     }
     printf("----------------------------------------------------------\n");
 }
