@@ -22,6 +22,7 @@ void storeInChest(Player,Npc);
 void withdrawOfChest(Player p,Npc npc);
 void withdrawInventory(Player, Object);
 void craftObject(Craft*,Player);
+void freePlayer(Player );
 
 
 #endif

@@ -130,5 +130,9 @@ void craftObject(Craft* c,Player p){
     }
 }
 
+void freePlayer(Player p){
+    free(p.inventory);
+}
+
 
 

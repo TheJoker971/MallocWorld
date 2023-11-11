@@ -125,3 +125,12 @@ void showChest(Chest* chest){
     }while(c != NULL);
     printf("----------------------------------------------------------\n");
 }
+
+void freeChest(Chest* chest){
+    Chest* current = chest;
+    while(current->next != NULL){
+        Chest* next = current->next;
+        free(current);
+        current = next;
+    }
+}

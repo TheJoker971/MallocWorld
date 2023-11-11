@@ -54,3 +54,8 @@ void repair(Object* inv){
         }
     }
 }
+
+void freeNpc(Npc npc){
+    freeChest(npc.chest);
+    free(npc.crafts);
+}

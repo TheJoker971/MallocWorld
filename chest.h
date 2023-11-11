@@ -15,5 +15,6 @@ void showChest(Chest*);
 Chest* getObject(Chest*,int);
 void deleteChain(Chest*,int);
 Object withdrawObject(Chest*);
+void freeChest(Chest*);
 
 #endif // CHEST_H
