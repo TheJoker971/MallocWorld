@@ -55,7 +55,7 @@ void resetObject(Object* o){
 }
 
 int isWeapon(int id){
-    int ids[] = {1,2,3,4,8,9,10,19,20,21,30,31,32};
+    int ids[] = {1,8,9,10,19,20,21,30,31,32};
     for(int i =0;i<13;i++){
         if(id == ids[i]){
             return 1;

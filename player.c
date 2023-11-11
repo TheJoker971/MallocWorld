@@ -163,3 +163,26 @@ void savePlayer(Player p,Chest* chest){
     }
     fclose(f);
 }
+
+void initSauvegarderHP(Player *p) {
+    FILE *file = fopen("sauvegarde_hp.txt", "w"); // Ouvre le fichier en mode écriture
+    if (file == NULL) {
+        printf("Erreur lors de l'ouverture du fichier de sauvegarde.\n");
+        return;
+    }
+    fprintf(file, "%d", p->hp); // Écrit les HP du joueur dans le fichier
+    fclose(file); // Ferme le fichier
+    printf("Les points de vie ont été sauvegardés.\n");
+}
+
+void showWeaponsInInventory(Player *p) {
+    printf("Armes dans l'inventaire :\n");
+    printf("---------------------------- ARMES ----------------------\n");
+    for (int i = 0; i < 10; i++) {
+        if (isWeapon(p->inventory[i].id)) {
+            printf("| Emplacement %02d | Arme ID %02d | Degats %02d | Durabilité %02d |\n", 
+                   i + 1, p->inventory[i].id, p->inventory[i].damage, p->inventory[i].durability);
+        }
+    }
+    printf("---------------------------------------------------------\n");
+}

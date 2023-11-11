@@ -26,6 +26,7 @@ void withdrawInventory(Player, Object);
 void craftObject(Craft*,Player);
 void freePlayer(Player );
 void savePlayer(Player,Chest*);
-
+void initSauvegarderHP(Player *p);
+void showWeaponsInInventory(Player *p);
 
 #endif
