@@ -4,11 +4,13 @@
 #include "npc.h"
 
 
+
 typedef struct Player
 {
     int hp;
     int maxHp;
     int xp;
+    int xpNext;
     int level;
     Object* inventory;
 } Player;
@@ -23,6 +25,7 @@ void withdrawOfChest(Player p,Npc npc);
 void withdrawInventory(Player, Object);
 void craftObject(Craft*,Player);
 void freePlayer(Player );
+void savePlayer(Player,Chest*);
 
 
 #endif

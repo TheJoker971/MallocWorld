@@ -1,12 +1,15 @@
 #include "player.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 Player initPlayer(){
     Player p;
     p.hp = 100;
+    p.level = 1;
     p.maxHp = 100;
     p.xp = 1;
+    p.xpNext = p.xp * 10;
     p.inventory = malloc(sizeof(Object)*10);
     initInventory(p.inventory);
     return p;
@@ -134,5 +137,29 @@ void freePlayer(Player p){
     free(p.inventory);
 }
 
-
-
+void savePlayer(Player p,Chest* chest){
+    char name[10];
+    char path[]="./saves/";
+    printf("Entrer le nom de la sauvegarde : ");
+    scanf("%s",&name);
+    strcat(name,".txt"),strcat(path,name);
+    FILE* f = fopen(path,"w+");
+    fprintf(f,"=== PLAYER ===\n");
+    fprintf(f,"{%d}\n",p.level);
+    fprintf(f,"{%d}/{%d}\n",p.xp,p.xpNext);
+    fprintf(f,"-- INVENTORY --\n");
+    for(int i = 0;i<10;i++){
+        Object o = p.inventory[i];
+        fprintf(f,"{%d}@{%d}@{%d}\n",o.quantity,o.id,o.durability);
+    }
+    fprintf(f,"-- STORAGE --\n");
+    Chest* current = chest;
+    while(current != NULL){
+        Object o = current->object;
+        if(o.id != 0){
+            fprintf(f,"{%d}@{%d}\n",o.quantity,o.id);
+        }
+        current = current->next;
+    }
+    fclose(f);
+}

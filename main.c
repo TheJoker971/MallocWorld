@@ -32,6 +32,7 @@ int main(int argc, char* argv[]){
     //showCraft(npc.crafts);
     //canCraft(npc.crafts,p.inventory);
     // Show the chest
+    savePlayer(p,npc.chest);
     
     return 0;
 }

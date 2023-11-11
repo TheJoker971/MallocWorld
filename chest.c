@@ -128,7 +128,7 @@ void showChest(Chest* chest){
 
 void freeChest(Chest* chest){
     Chest* current = chest;
-    while(current->next != NULL){
+    while(current != NULL){
         Chest* next = current->next;
         free(current);
         current = next;
