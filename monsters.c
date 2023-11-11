@@ -194,9 +194,9 @@ void attaque(Player *p, Monster *monster){
 
 void afficherPointAttaque(Player *p, Monster *monster){
     printf("\n-----------------------------\n");
-    printf("| Joueur  | %d point de vie |\n", p->hp);
-    printf("| Monstre | %d point de vie |\n", monster->pv);
-    printf("| Arme    | %d point de vie |\n", p->inventory[weapon].durability);
+    printf("| Joueur  | %02d point de vie |\n", p->hp);
+    printf("| Monstre | %02d point de vie |\n", monster->pv);
+    printf("| Arme    | %02d point de vie |\n", p->inventory[weapon].durability);
     printf("-----------------------------\n");
 }
 

@@ -28,7 +28,7 @@ int main(int argc, const char* argv[]){
 
             if (depl == 'z' || depl == 's' || depl == 'q' || depl == 'd') {
                 movePlayer(map, depl, p);
-                chargerHPSauvegarde(&p);
+                
             } else {
                 printf("Entrée non valide. Veuillez réessayer.\n");
             }

@@ -130,7 +130,7 @@ void showWeaponsInInventory(Player *p) {
     printf("---------------------------- ARMES ----------------------\n");
     for (int i = 0; i < 10; i++) {
         if (isWeapon(p->inventory[i].id)) {
-            printf("| Emplacement %d | Arme ID %d | Degats %d | Durabilité %d |\n", 
+            printf("| Emplacement %02d | Arme ID %02d | Degats %02d | Durabilité %02d |\n", 
                    i + 1, p->inventory[i].id, p->inventory[i].degats, p->inventory[i].durability);
         }
     }
