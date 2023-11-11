@@ -14,7 +14,7 @@ int main(int argc, const char* argv[]){
     //Dessin de la map
     drawMap(map);
     // SaveMap
-    saveMap(map);
+    //saveMap(map);
     printf("\n");
     // Chargement de la map
   //Conditions qui demande à l'utilisateur d'entrer une touche

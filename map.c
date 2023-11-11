@@ -7,7 +7,7 @@ void saveMap(int** map[]){
     char name[10];
     char path[]="./saves/";
     printf("Entrer le nom de la sauvegarde : ");
-    scanf("%s",&name);
+    scanf("%s",name);
     getchar();
     strcat(name,".txt");
     strcat(path,name);
