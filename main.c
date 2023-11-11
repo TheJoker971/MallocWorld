@@ -73,6 +73,7 @@ int main(int argc, const char* argv[]){
     
   //Dessin de la map
     //draw(map);
+
   //Conditions qui demande à l'utilisateur d'entrer une touche
     char depl = 'A';
     do {

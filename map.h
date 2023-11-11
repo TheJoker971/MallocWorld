@@ -1,7 +1,8 @@
 #ifndef MAP_H
 #define MAP_H
 
-#define height  10
+
+#define height  10 
 #define width   10
 #define PIXELS      height * width
 
@@ -35,8 +36,10 @@ void preSaveMap(int**[]);
 void drawInFile(FILE*,int**);
 int percent();
 void saveMap(int** []);
-int*** chargeMap();
-void chargePart(int,int**);
+int*** chargeMap(char[]);
+void chargePart(int,int**,FILE*);
+void reloadMap(int** []);
+
 
 
 #endif // MAP_H
