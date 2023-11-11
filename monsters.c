@@ -132,7 +132,7 @@ int chooseArmeAfter(Player *p){
     } while (!isValidInput);
 
     // Mettre à jour les dégâts et la durabilité de l'arme choisie
-    degat = p->inventory[weapon].degats;
+    degat = p->inventory[weapon].damage;
     printf("--------------------\n");
     printf("| %d de degats     |\n", degat);
     printf("| %d de durabilité |\n", p->inventory[weapon].durability);
@@ -150,7 +150,7 @@ int chooseArme(Player *p){
 
     idArme(weapon);
     if(isWeapon(p->inventory[weapon].id)){
-            degat = p->inventory[weapon].degats;
+            degat = p->inventory[weapon].damage;
         }
     printf("--------------------\n");
     printf("| %d de degats     |\n", degat);
