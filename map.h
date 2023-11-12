@@ -6,7 +6,6 @@
 #define width   10
 #define PIXELS      height * width
 
-
 struct Coordonnee{
     int x;
     int y;
@@ -15,7 +14,7 @@ struct Coordonnee{
 typedef struct Coordonnee Coordonnee;
 
 
-void moveUp(int**[]);
+//void moveUp(int**[]);
 int*** initMap();
 int** initPart(int);
 int** allowMemory();
