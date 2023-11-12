@@ -58,7 +58,7 @@ void moveLeftZone(int*** tab, int i, int j, Player p){
     int resultTab = tab[zone][i][j - 1];
     tab[zone][i][j] = 0;
 
-    switch (checkMovement(resultTab, p)) {
+    switch (checkMovement(resultTab, p, zone)) {
         case 2 :
             if (zone == 0){
             zone = 1;
@@ -109,7 +109,7 @@ void moveRightZone(int*** tab,int i,int j, Player p){
     int resultTab = tab[zone][i][j+1];
     tab[zone][i][j] = 0;
 
-    switch (checkMovement(resultTab, p)) {
+    switch (checkMovement(resultTab, p, zone)) {
         case 2 :
             if (zone == 0){
             zone = 1;
@@ -174,7 +174,7 @@ void moveUpZoneInside(int*** tab, int i, int j, Player p){
     int resultTab = tab[zone][i - 1][j];
     tab[zone][i][j] = 0;
 
-    switch (checkMovement(resultTab, p)) {
+    switch (checkMovement(resultTab, p, zone)) {
         case 2 :
         if (zone == 0){
             zone = 1;
@@ -208,7 +208,7 @@ void moveUpZoneBorder (int*** tab, int i, int j, Player p){
     int resultTab = tab[zone][0][j];
     tab[zone][i][j] = 0;
 
-    switch (checkMovement(resultTab, p)) {
+    switch (checkMovement(resultTab, p, zone)) {
         case 2 :
         if (zone == 0){
             zone = 1;
@@ -274,7 +274,7 @@ void moveDownZoneInside(int*** tab, int i, int j, Player p){
     int resultTab = tab[zone][i + 1][j];
     tab[zone][i][j] = 0;
 
-    switch (checkMovement(resultTab, p)) {
+    switch (checkMovement(resultTab, p, zone)) {
         case 2 :
         if (zone == 0) {
             zone = 1;
@@ -308,7 +308,7 @@ void moveDownZoneBorder(int*** tab, int i , int j, Player p){
     int resultTab = tab[zone][height - 1][j];
     tab[zone][i][j] = 0;
 
-    switch (checkMovement(resultTab, p)) {
+    switch (checkMovement(resultTab, p, zone)) {
         case 2 :
         if (zone == 0) {
             compteur = 0;

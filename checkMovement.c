@@ -3,18 +3,18 @@
 //
 #include "checkMovement.h"
 #include <stdio.h>
+#include <time.h>
 #include "movePlayer.h"
 #include <stdlib.h>
 #include "monsters.h"
 
-int checkMovement(int resultTab, Player p){
+int checkMovement(int resultTab, Player p, int zone){
     char yesNo;
     int result = 0;
+    srand((unsigned int)time(NULL));
+    int nb = rand() % 5;
 
     switch (resultTab) {
-        case 12:
-            printf("\n\n\nVous venez de rencontrer un montre, voulez vous engager un combat ? (y/n)\n\n\n");
-            break;
         case -1:
             printf("\n\n\nImpossible de franchir la case\n\n\n");
             result = 1;
@@ -27,17 +27,56 @@ int checkMovement(int resultTab, Player p){
         case 3:
             printf("\n\n\nPlante\n\n\n");
             // addInventory(Object*,Object) Object* = Player.inventory, Object = initObject(id,quantity)
-            //addInventory(p.inventory, initObject(7,4));
-            //showInventory(p);
+            addInventory(p.inventory, initObject(7,nb,0,0));
+            showInventory(p);
             break;
 
         case 4:
-            printf("\n\n\nRocher\n\n\n");
+            printf("\n\n\nPierre\n\n\n");
+            addInventory(p.inventory, initObject(6,nb,0,0));
             break;
 
         case 5:
-            printf("\n\n\nBois\n\n\n");
+            printf("\n\n\nSapin\n\n\n");
+            addInventory(p.inventory, initObject(5,nb,0,0));
             break;
+
+        case 6:
+            printf("\n\n\nLavande\n\n\n");
+            addInventory(p.inventory, initObject(18,nb,0,0));
+            showInventory(p);
+            break;
+
+        case 7:
+            printf("\n\n\nFer\n\n\n");
+            addInventory(p.inventory, initObject(17,nb,0,0));
+            showInventory(p);
+            break;
+
+        case 8:
+            printf("\n\n\nHetre\n\n\n");
+            addInventory(p.inventory, initObject(16,nb,0,0));
+            showInventory(p);
+            break;
+
+        case 9:
+            printf("\n\n\nChanvre\n\n\n");
+            addInventory(p.inventory, initObject(29,nb,0,0));
+            showInventory(p);
+            break;
+
+        case 10:
+            printf("\n\n\nDiamant\n\n\n");
+            addInventory(p.inventory, initObject(28,nb,0,0));
+            showInventory(p);
+            break;
+
+        case 11:
+            printf("\n\n\nChene\n\n\n");
+            addInventory(p.inventory, initObject(27,nb,0,0));
+            showInventory(p);
+            break;
+
 
         case -2:
             printf("\n\n\nPORTAIL ZONE 2\n\n\n");
