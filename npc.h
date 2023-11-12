@@ -6,8 +6,12 @@
 typedef struct Npc{
     Craft* crafts;
     Chest* chest;
-
 }Npc;
 
 Npc initNpc();
+void canCraft(Craft*,Object*);
+int haveComponent(Object*, Object* );
+int isInInventory(Object,Object*);
+void repair(Object*);
+void freeNpc(Npc);
 #endif // NPC_H
