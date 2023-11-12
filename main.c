@@ -12,7 +12,6 @@ int main(int argc, const char* argv[]){
     int*** map = initMap();
     Npc npc = initNpc();
     Player p = initPlayer();
-
     // Autres initialisations...
 
     char startCommand[10];
@@ -50,4 +49,5 @@ int main(int argc, const char* argv[]){
 
     return 0;
 }
+
 

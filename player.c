@@ -55,9 +55,8 @@ int addInventory(Object* inv,Object o){
             }
         }else{
             if(inv[i].id == 0){
-                inv[i].id = o.id;
-                inv[i].quantity = o.quantity;
-                inv[i].durability = o.durability;
+                inv[i] = o;
+                
                 return 1;
             }
         }
