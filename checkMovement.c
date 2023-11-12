@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include "monsters.h"
 
-int checkMovement(int resultTab){
+int checkMovement(int resultTab, Player p){
     char yesNo;
     int result = 0;
 
@@ -26,6 +26,9 @@ int checkMovement(int resultTab){
 
         case 3:
             printf("\n\n\nPlante\n\n\n");
+            // addInventory(Object*,Object) Object* = Player.inventory, Object = initObject(id,quantity)
+            //addInventory(p.inventory, initObject(7,4));
+            //showInventory(p);
             break;
 
         case 4:
