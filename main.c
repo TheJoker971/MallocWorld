@@ -12,7 +12,6 @@ int main(int argc, const char* argv[]){
     int*** map = initMap();
     Npc npc = initNpc();
     Player p = initPlayer();
-    //saveMap(map);
 
     // Autres initialisations...
 
@@ -75,15 +74,6 @@ int main(int argc, const char* argv[]){
   //Dessin de la map
     //draw(map);
 
-<<<<<<< HEAD
-    //Dessin de la map
-    drawMap(map);
-    // SaveMap
-    //saveMap(map);
-    printf("\n");
-    // Chargement de la map
-=======
->>>>>>> 0f8fc04fecb0f78edd75a0b92af4ff874d6a4dfa
   //Conditions qui demande à l'utilisateur d'entrer une touche
     char depl = 'A';
     do {

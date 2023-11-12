@@ -26,6 +26,7 @@ int checkMovement(int resultTab){
 
         case 3:
             printf("\n\n\nPlante\n\n\n");
+            // addInventory(Object*,Object) Object* = Player.inventory, Object = initObject(id,quantity)
             break;
 
         case 4:
