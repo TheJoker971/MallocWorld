@@ -19,5 +19,8 @@ Object sword(int);
 Object plant(int,int);
 Object lance(int);
 void resetObject(Object*);
+int isPickAxe(int);
+int isAxe(int);
+int isBillHook(int);
 
 #endif  //OBJECT_H
