@@ -24,5 +24,4 @@ void moveDownZone(int***, int, int, Player p);
 void moveDownZoneInside(int***, int, int, Player p);
 void moveDownZoneBorder(int***, int, int, Player p);
 
-
 #endif //MALLOCWORLD_MOVEPLAYER_H

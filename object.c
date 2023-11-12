@@ -215,3 +215,33 @@ Object health(int id){
     }
     return o;
 }
+
+int isPickAxe(int id){
+    int ids[]= {2,12,23};
+    for(int i = 0;i<3;i++){
+        if(id == ids[i]){
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int isBillHook(int id){
+    int ids[]= {3,13,24};
+    for(int i = 0;i<3;i++){
+        if(id == ids[i]){
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int isAxe(int id){
+    int ids[]= {4,14,25};
+    for(int i = 0;i<3;i++){
+        if(id == ids[i]){
+            return 1;
+        }
+    }
+    return 0;
+}

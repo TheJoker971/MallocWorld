@@ -21,10 +21,14 @@ void resetObject(Object*);
 Object ressource(int,int);
 Object sword(int);
 Object lance(int);
+
+void resetObject(Object*);
+int isPickAxe(int);
+int isAxe(int);
+int isBillHook(int);
 Object hammer(int);
 Object tool(int);
 Object armor(int);
 Object health(int);
-
 
 #endif  //OBJECT_H
