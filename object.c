@@ -30,11 +30,12 @@ Object initObject(int id,int q){
         armor(id),
         tool(id)
     };
-    for(int i = 0;i<8;i++){
+    for(int i = 0;i<7;i++){
         if(tab[i].id != 0){
             return tab[i];
         }
     }
+    return initObject(0,0);
 }
 
 int isRessource(int id){

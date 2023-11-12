@@ -9,20 +9,20 @@ void movePlayer(int*** tab, char, Player p);
 
 
 void moveLeft(int***, Player p);
-void moveLeftZone(int***, int, int);
+void moveLeftZone(int***, int, int, Player p);
 
 void moveRight(int***, Player p);
-void moveRightZone(int***,int,int);
+void moveRightZone(int***,int,int, Player p);
 
 void moveUp(int***, Player p);
 void moveUpZone(int***,int,int, Player p);
-void moveUpZoneInside(int***, int, int);
-void moveUpZoneBorder(int***, int, int);
+void moveUpZoneInside(int***, int, int, Player p);
+void moveUpZoneBorder(int***, int, int, Player p);
 
 void moveDown(int***, Player p);
 void moveDownZone(int***, int, int, Player p);
-void moveDownZoneInside(int***, int, int);
-void moveDownZoneBorder(int***, int, int);
+void moveDownZoneInside(int***, int, int, Player p);
+void moveDownZoneBorder(int***, int, int, Player p);
 
 
 #endif //MALLOCWORLD_MOVEPLAYER_H

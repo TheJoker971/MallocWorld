@@ -140,7 +140,7 @@ void savePlayer(Player p,Chest* chest){
     char name[10];
     char path[]="./saves/";
     printf("Entrer le nom de la sauvegarde : ");
-    scanf("%s",&name);
+    scanf("%s",name);
     strcat(name,".txt"),strcat(path,name);
     FILE* f = fopen(path,"w+");
     fprintf(f,"=== PLAYER ===\n");

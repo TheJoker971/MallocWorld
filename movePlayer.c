@@ -48,17 +48,52 @@ void moveLeft(int*** tab, Player p){
             if (tab[zone][i][j] == 1) {
                 int resultTab = tab[zone][i][j - 1];
                  if (compteur != 0 && checkCase(resultTab, p) != 0) {
-                    moveLeftZone(tab, i, j);
+                    moveLeftZone(tab, i, j, p);
                 } else compteur = 1;
             }
         }
     }
 }
 
-void moveLeftZone(int*** tab, int i, int j){
+void moveLeftZone(int*** tab, int i, int j, Player p){
     int resultTab = tab[zone][i][j - 1];
     tab[zone][i][j] = 0;
-    if(checkMovement(resultTab) == 2){
+
+    switch (checkMovement(resultTab, p)) {
+        case 2:
+            if (zone == 0){
+            zone = 1;
+            zoneTravelLeftZone1To2(tab, zone);
+        } else if (zone == 1){
+            compteur = 0;
+            zone = 0;
+            zoneTravelLeftZone1To2(tab, zone);
+        }
+            break;
+
+        case 3:
+            if (zone == 1) {
+            zone = 2;
+            zoneTravelLeftZone2To3(tab, zone);
+        } else if(zone ==2){
+            compteur = 0;
+            zone = 1;
+            zoneTravelLeftZone2To3(tab, zone);
+        }
+            break;
+
+
+        default:
+            if(j>0){
+            tab[zone][i][j-1] = 1;
+        } else if (j==0){
+            tab[zone][i][j] = 1;
+        }
+            break;
+    }
+
+
+    /*if(checkMovement(resultTab, p) == 2){
         if (zone == 0){
             zone = 1;
             zoneTravelLeftZone1To2(tab, zone);
@@ -68,7 +103,7 @@ void moveLeftZone(int*** tab, int i, int j){
             zoneTravelLeftZone1To2(tab, zone);
         }
 
-    } else if(checkMovement(resultTab) == 3){
+    } else if(checkMovement(resultTab, p) == 3){
         if (zone == 1) {
             zone = 2;
             zoneTravelLeftZone2To3(tab, zone);
@@ -85,7 +120,7 @@ void moveLeftZone(int*** tab, int i, int j){
         } else if (j==0){
             tab[zone][i][j] = 1;
         }
-    }
+    }*/
 }
 
 //TOUS LES DÉPLACEMENT VERS LA DROITE
@@ -95,17 +130,17 @@ void moveRight(int*** tab, Player p){
             int resultTab = tab[zone][i][j+1];
             if (tab[zone][i][j] == 1 && checkCase(resultTab, p) != 0) {
                 if ( compteur != 0){
-                    moveRightZone(tab, i, j);
+                    moveRightZone(tab, i, j, p);
                 } else compteur = 1;
             }
         }
     }
 }
 
-void moveRightZone(int*** tab,int i,int j){
+void moveRightZone(int*** tab,int i,int j, Player p){
     int resultTab = tab[zone][i][j+1];
     tab[zone][i][j] = 0;
-    if(checkMovement(resultTab) == 2){
+    if(checkMovement(resultTab, p) == 2){
         if (zone == 0){
             zone = 1;
             zoneTravelRightZone1To2(tab, zone);
@@ -114,7 +149,7 @@ void moveRightZone(int*** tab,int i,int j){
             zone = 0;
             zoneTravelRightZone1To2(tab, zone);
         }
-    } else if(checkMovement(resultTab) == 3){
+    } else if(checkMovement(resultTab, p) == 3){
         if (zone == 1){
             zone = 2;
             zoneTravelRightZone2To3(tab, zone);
@@ -151,20 +186,20 @@ void moveUpZone(int*** tab,int i,int j, Player p){
     if( i > 1){
         int resultTab = tab[zone][i - 1][j];
         if(checkCase(resultTab, p) != 0){
-            moveUpZoneInside(tab, i, j);
+            moveUpZoneInside(tab, i, j, p);
         }
     } else{
         int resultTab = tab[zone][0][j];
         if(checkCase(resultTab, p) != 0){
-            moveUpZoneBorder(tab, i, j);
+            moveUpZoneBorder(tab, i, j, p);
         }
     }
 }
 
-void moveUpZoneInside(int*** tab, int i, int j){
+void moveUpZoneInside(int*** tab, int i, int j, Player p){
     int resultTab = tab[zone][i - 1][j];
     tab[zone][i][j] = 0;
-    if(checkMovement(resultTab) == 2){
+    if(checkMovement(resultTab, p) == 2){
         if (zone == 0){
             zone = 1;
             zoneTravelUpZone1To2(tab, zone);
@@ -173,7 +208,7 @@ void moveUpZoneInside(int*** tab, int i, int j){
             zone = 0;
             zoneTravelUpZone1To2(tab, zone);
         }
-    } else if(checkMovement(resultTab) == 3){
+    } else if(checkMovement(resultTab, p) == 3){
         if (zone == 1){
             zone = 2;
             zoneTravelUpZone2To3(tab, zone);
@@ -187,10 +222,10 @@ void moveUpZoneInside(int*** tab, int i, int j){
     }
 }
 
-void moveUpZoneBorder (int*** tab, int i, int j){
+void moveUpZoneBorder (int*** tab, int i, int j, Player p){
     int resultTab = tab[zone][0][j];
     tab[zone][i][j] = 0;
-    if(checkMovement(resultTab) == 2){
+    if(checkMovement(resultTab, p) == 2){
         if (zone == 0){
             zone = 1;
             zoneTravelUpZone1To2(tab, zone);
@@ -199,7 +234,7 @@ void moveUpZoneBorder (int*** tab, int i, int j){
             zone = 0;
             zoneTravelUpZone1To2(tab, zone);
         }
-    } else if(checkMovement(resultTab) == 3){
+    } else if(checkMovement(resultTab, p) == 3){
         if (zone == 1){
             zone = 2;
             zoneTravelUpZone2To3(tab, zone);
@@ -236,20 +271,20 @@ void moveDownZone(int*** tab, int i, int j, Player p){
         if (i < height - 2){
             int resultTab = tab[zone][i + 1][j];
             if(checkCase(resultTab, p) != 0) {
-                moveDownZoneInside(tab, i, j);
+                moveDownZoneInside(tab, i, j, p);
             }
         } else {
             int resultTab = tab[zone][height - 1][j];
             if(checkCase(resultTab, p) != 0) {
-                moveDownZoneBorder(tab, i, j);
+                moveDownZoneBorder(tab, i, j, p);
             }
         }
 }
 
-void moveDownZoneInside(int*** tab, int i, int j){
+void moveDownZoneInside(int*** tab, int i, int j, Player p){
     int resultTab = tab[zone][i + 1][j];
     tab[zone][i][j] = 0;
-    if(checkMovement(resultTab) == 2){
+    if(checkMovement(resultTab, p) == 2){
         if (zone == 0) {
             zone = 1;
             zoneTravelDownZone1To2(tab, zone);
@@ -258,7 +293,7 @@ void moveDownZoneInside(int*** tab, int i, int j){
             zone = 0;
             zoneTravelDownZone1To2(tab, zone);
         }
-    } else if(checkMovement(resultTab) == 3){
+    } else if(checkMovement(resultTab, p) == 3){
         if (zone == 1) {
             compteur = 0;
             zone = 2;
@@ -274,10 +309,10 @@ void moveDownZoneInside(int*** tab, int i, int j){
     }
 }
 
-void moveDownZoneBorder(int*** tab, int i , int j){
+void moveDownZoneBorder(int*** tab, int i , int j, Player p){
     int resultTab = tab[zone][height - 1][j];
     tab[zone][i][j] = 0;
-    if(checkMovement(resultTab) == 2){
+    if(checkMovement(resultTab, p) == 2){
         if (zone == 0) {
             compteur = 0;
             zone = 1;
@@ -287,7 +322,7 @@ void moveDownZoneBorder(int*** tab, int i , int j){
             zone = 0;
             zoneTravelDownZone1To2(tab, zone);
         }
-    } else if(checkMovement(resultTab) == 3){
+    } else if(checkMovement(resultTab, p) == 3){
         if (zone == 1) {
             compteur = 0;
             zone = 2;
