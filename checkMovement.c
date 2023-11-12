@@ -8,11 +8,7 @@
 #include <stdlib.h>
 #include "monsters.h"
 
-<<<<<<< HEAD
 int checkMovement(int resultTab, Player p, int zone){
-=======
-int checkMovement(int resultTab, Player p){
->>>>>>> develop
     char yesNo;
     int result = 0;
     srand((unsigned int)time(NULL));
@@ -31,11 +27,7 @@ int checkMovement(int resultTab, Player p){
         case 3:
             printf("\n\n\nPlante\n\n\n");
             // addInventory(Object*,Object) Object* = Player.inventory, Object = initObject(id,quantity)
-<<<<<<< HEAD
             addInventory(p.inventory, initObject(7,nb,0,0));
-=======
-            addInventory(p.inventory, initObject(7,4));
->>>>>>> develop
             showInventory(p);
             break;
 
@@ -84,7 +76,6 @@ int checkMovement(int resultTab, Player p){
             addInventory(p.inventory, initObject(27,nb,0,0));
             showInventory(p);
             break;
-
 
         case -2:
             printf("\n\n\nPORTAIL ZONE 2\n\n\n");
