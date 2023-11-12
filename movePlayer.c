@@ -7,95 +7,30 @@
 #include "map.h"
 #include "checkMovement.h"
 #include "zoneTravel.h"
-void movePlayer(int*** tab, char deplacement){
 
-    int zone = 0;
+int zone = 0;
+int compteur = 1;
+
+void movePlayer(int*** tab, char deplacement, Player player){
+
     switch (deplacement) {
         case 'z':
-            
-            for (int i = 0; i < 10; i++) {
-                for (int j = 0; j < 10; j++) {
-                    if (tab[0][i][j] == 1) {
-                        int resultTab = tab[0][i - 1][j];
-                        checkMovement(resultTab);
-                        tab[0][i][j] = 0;
-                        if(i != 0){
-                            tab[0][i - 1][j] = 1;
-                        } else {
-                            tab[0][0][j] = 1;
-                        }
-                    }
-                }
-            }
+            moveUp(tab, player);
             drawMap(tab);
             break;
 
         case 'q':
-            for (int i = 0; i < 10; i++) {
-                for (int j = 0; j < 10; j++) {
-                    if (tab[0][i][j] == 1) {
-                        int resultTab = tab[0][i][j - 1];
-                        checkMovement(resultTab);
-                        tab[0][i][j] = 0;
-                        if(j>0){
-                            tab[0][i][j-1] = 1;
-                        } else if (j==0){
-                            tab[0][i][j] = 1;
-                        }
-                    }
-                }
-            }
+            moveLeft(tab, player);
             drawMap(tab);
             break;
 
         case 'd':
-            for (int i = 0; i <10; i++) {
-                for (int j = 10; j >=0; j--) {
-                    if (tab[0][i][j] == 1) {
-                        int resultTab = tab[0][i][j+1];
-                        tab[zone][i][j] = 0;
-                        if(checkMovement(resultTab) == 1){
-                            zoneTravel(tab);
-                            zone = 1;
-                        }
-                        else{
-                            if(j<9){
-                                tab[zone][i][j+1] = 1;
-                            } else {
-                                tab[zone][i][j] = 1;
-                            }
-                        }
-                    } else if (tab[1][i][j] == 1) {
-                        int resultTab = tab[1][i][j+1];
-                        checkMovement(resultTab);
-                        tab[1][i][j] = 0;
-                        printf("\n\n\nla zone est: %d\n\n\n", zone);
-                            if(j<9){
-                                tab[1][i][j+1] = 1;
-                            } else {
-                                tab[1][i][j] = 1;
-                            }
-                    }
-                }
-            }
+            moveRight(tab, player);
             drawMap(tab);
             break;
 
         case 's':
-            for (int i = 9; i >= 0; i--) {
-                for (int j = 0; j < 10; j++) {
-                    if (tab[0][i][j] == 1) {
-                        int resultTab = tab[0][i + 1][j];
-                        checkMovement(resultTab);
-                        tab[0][i][j] = 0;
-                        if(i<9){
-                            tab[0][i+1][j] = 1;
-                        } else {
-                            tab[0][i][j] = 1;
-                        }
-                    }
-                }
-            }
+            moveDown(tab, player);
             drawMap(tab);
             break;
 
@@ -104,3 +39,303 @@ void movePlayer(int*** tab, char deplacement){
             break;
     }
 }
+
+//TOUS LES DÉPLACEMENT VERS LA GAUCHE
+void moveLeft(int*** tab, Player p){
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            if (tab[zone][i][j] == 1) {
+                int resultTab = tab[zone][i][j - 1];
+                 if (compteur != 0 && checkCase(resultTab, p) != 0) {
+                    moveLeftZone(tab, i, j, p);
+                } else compteur = 1;
+            }
+        }
+    }
+}
+
+void moveLeftZone(int*** tab, int i, int j, Player p){
+    int resultTab = tab[zone][i][j - 1];
+    tab[zone][i][j] = 0;
+
+    switch (checkMovement(resultTab, p)) {
+        case 2 :
+            if (zone == 0){
+            zone = 1;
+            zoneTravelLeftZone1To2(tab, zone);
+        } else if (zone == 1){
+            compteur = 0;
+            zone = 0;
+            zoneTravelLeftZone1To2(tab, zone);
+        }
+            break;
+
+        case 3 :
+            if (zone == 1) {
+            zone = 2;
+            zoneTravelLeftZone2To3(tab, zone);
+        } else if(zone ==2){
+            compteur = 0;
+            zone = 1;
+            zoneTravelLeftZone2To3(tab, zone);
+        }
+            break;
+
+        default:
+            if(j>0){
+            tab[zone][i][j-1] = 1;
+        } else if (j==0){
+            tab[zone][i][j] = 1;
+        }
+            break;
+    }
+}
+
+//TOUS LES DÉPLACEMENT VERS LA DROITE
+void moveRight(int*** tab, Player p){
+    for (int i = 0; i < height; i++) {
+        for (int j = width; j >=0; j--) {
+            int resultTab = tab[zone][i][j+1];
+            if (tab[zone][i][j] == 1 && checkCase(resultTab, p) != 0) {
+                if ( compteur != 0){
+                    moveRightZone(tab, i, j, p);
+                } else compteur = 1;
+            }
+        }
+    }
+}
+
+void moveRightZone(int*** tab,int i,int j, Player p){
+    int resultTab = tab[zone][i][j+1];
+    tab[zone][i][j] = 0;
+
+    switch (checkMovement(resultTab, p)) {
+        case 2 :
+            if (zone == 0){
+            zone = 1;
+            zoneTravelRightZone1To2(tab, zone);
+        } else if (zone == 1){
+            compteur = 0;
+            zone = 0;
+            zoneTravelRightZone1To2(tab, zone);
+        }
+            break;
+
+        case 3 :
+            if (zone == 1){
+            zone = 2;
+            zoneTravelRightZone2To3(tab, zone);
+        } else if (zone == 2){
+            compteur = 0;
+            zone = 1;
+            zoneTravelRightZone2To3(tab, zone);
+        }
+            break;
+
+        default:
+            if(j<9){
+            tab[zone][i][j+1] = 1;
+        } else {
+            tab[zone][i][j] = 1;
+        }
+            break;
+    }
+}
+
+
+//TOUS LES DÉPLACEMENT VERS LE HAUT
+void moveUp(int*** tab, Player p){
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            if (tab[zone][i][j] == 1 ) {
+                if ( compteur != 0) {
+                    moveUpZone(tab, i, j, p);
+                } else compteur = 1;
+            }
+        }
+    }
+}
+
+void moveUpZone(int*** tab,int i,int j, Player p){
+    if( i > 1){
+        int resultTab = tab[zone][i - 1][j];
+        if(checkCase(resultTab, p) != 0){
+            moveUpZoneInside(tab, i, j, p);
+        }
+    } else{
+        int resultTab = tab[zone][0][j];
+        if(checkCase(resultTab, p) != 0){
+            moveUpZoneBorder(tab, i, j, p);
+        }
+    }
+}
+
+void moveUpZoneInside(int*** tab, int i, int j, Player p){
+    int resultTab = tab[zone][i - 1][j];
+    tab[zone][i][j] = 0;
+
+    switch (checkMovement(resultTab, p)) {
+        case 2 :
+        if (zone == 0){
+            zone = 1;
+            zoneTravelUpZone1To2(tab, zone);
+        } else if (zone == 1){
+            compteur = 0;
+            zone = 0;
+            zoneTravelUpZone1To2(tab, zone);
+        }
+            break;
+
+        case 3 :
+        if (zone == 1){
+            zone = 2;
+            zoneTravelUpZone2To3(tab, zone);
+        } else if (zone == 2){
+            compteur = 1;
+            zone = 0;
+            zoneTravelUpZone2To3(tab, zone);
+        }
+            break;
+
+        default:
+        tab[zone][i - 1][j] = 1;
+            break;
+    }
+
+}
+
+void moveUpZoneBorder (int*** tab, int i, int j, Player p){
+    int resultTab = tab[zone][0][j];
+    tab[zone][i][j] = 0;
+
+    switch (checkMovement(resultTab, p)) {
+        case 2 :
+        if (zone == 0){
+            zone = 1;
+            zoneTravelUpZone1To2(tab, zone);
+        } else if (zone == 1){
+            compteur = 0;
+            zone = 0;
+            zoneTravelUpZone1To2(tab, zone);
+        }
+            break;
+
+        case 3 :
+        if (zone == 1){
+            zone = 2;
+            zoneTravelUpZone2To3(tab, zone);
+        } else if (zone == 2){
+            compteur = 0;
+            zone = 1;
+            zoneTravelUpZone2To3(tab, zone);
+        }
+            break;
+
+        default:
+        tab[zone][i][j] = 0;
+        tab[zone][height - height][j] = 1;
+            break;
+    }
+}
+
+
+
+
+
+
+// TOUS LES DÉPLACEMENTS VERS LE BAS
+void moveDown(int*** tab, Player p){
+    for (int i = height-1; i >= 0; i--) {
+        for (int j = 0; j < width; j++) {
+            if (tab[zone][i][j] == 1 ) {
+                if ( compteur != 0){
+                    moveDownZone(tab, i, j, p);
+                } else compteur = 1;
+            }
+        }
+    }
+}
+
+void moveDownZone(int*** tab, int i, int j, Player p){
+        if (i < height - 2){
+            int resultTab = tab[zone][i + 1][j];
+            if(checkCase(resultTab, p) != 0) {
+                moveDownZoneInside(tab, i, j, p);
+            }
+        } else {
+            int resultTab = tab[zone][height - 1][j];
+            if(checkCase(resultTab, p) != 0) {
+                moveDownZoneBorder(tab, i, j, p);
+            }
+        }
+}
+
+void moveDownZoneInside(int*** tab, int i, int j, Player p){
+    int resultTab = tab[zone][i + 1][j];
+    tab[zone][i][j] = 0;
+
+    switch (checkMovement(resultTab, p)) {
+        case 2 :
+        if (zone == 0) {
+            zone = 1;
+            zoneTravelDownZone1To2(tab, zone);
+        } else if (zone == 1) {
+            compteur = 0;
+            zone = 0;
+            zoneTravelDownZone1To2(tab, zone);
+        }
+            break;
+
+        case 3 :
+        if (zone == 1) {
+            compteur = 0;
+            zone = 2;
+            zoneTravelDownZone2To3(tab, zone);
+        } else if (zone == 2) {
+            compteur = 0;
+            zone = 1;
+            zoneTravelDownZone2To3(tab, zone);
+        }
+            break;
+
+        default:
+        tab[zone][i+1][j] = 1;
+            break;
+    }
+}
+
+void moveDownZoneBorder(int*** tab, int i , int j, Player p){
+    int resultTab = tab[zone][height - 1][j];
+    tab[zone][i][j] = 0;
+
+    switch (checkMovement(resultTab, p)) {
+        case 2 :
+        if (zone == 0) {
+            compteur = 0;
+            zone = 1;
+            zoneTravelDownZone1To2(tab, zone);
+        } else if (zone == 1) {
+            compteur = 0;
+            zone = 0;
+            zoneTravelDownZone1To2(tab, zone);
+        }
+            break;
+
+        case 3 :
+        if (zone == 1) {
+            compteur = 0;
+            zone = 2;
+            zoneTravelDownZone2To3(tab, zone);
+        } else if (zone == 2) {
+            compteur = 0;
+            zone = 1;
+            zoneTravelDownZone2To3(tab, zone);
+        }
+            break;
+
+        default:
+        tab[zone][height - 1][j] = 1;
+            break;
+    }
+}
+
