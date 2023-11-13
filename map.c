@@ -295,6 +295,7 @@ int*** chargeMap(char name[]){
         FILE* file = fopen(name,"r");
         chargePart(i,map[i],file);
     }
+    preSaveMap(map);
     return map;
 }
 

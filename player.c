@@ -10,9 +10,20 @@ Player initPlayer(){
     p.level = 1;
     p.maxHp = 100;
     p.xp = 1;
-    p.xpNext = p.xp * 10;
+    p.xpNext = p.level * 10;
     p.inventory = malloc(sizeof(Object)*10);
     initInventory(p.inventory);
+    return p;
+}
+Player initChargePlayer(){
+    Player p;
+    p.hp = 100;
+    p.level = 1;
+    p.maxHp = 100;
+    p.xp = 1;
+    p.xpNext = p.level * 10;
+    p.inventory = malloc(sizeof(Object)*10);
+    initBlankInventory(p.inventory);
     return p;
 }
 
@@ -23,6 +34,12 @@ void initInventory(Object* tab){
         }else{
             tab[i] = blankObject();
         }
+    }
+}
+
+void initBlankInventory(Object* tab){
+    for(int i = 0;i < 10;i++){
+        tab[i] = blankObject();
     }
 }
 
@@ -139,13 +156,14 @@ void freePlayer(Player p){
 void savePlayer(Player p,Chest* chest){
     char name[10];
     char path[]="./saves/";
-    printf("Entrer le nom de la sauvegarde : ");
+    printf("Entrer le nom de la sauvegarde du player : ");
     scanf("%s",name);
     strcat(name,".txt"),strcat(path,name);
     FILE* f = fopen(path,"w+");
     fprintf(f,"=== PLAYER ===\n");
     fprintf(f,"{%d}\n",p.level);
     fprintf(f,"{%d}/{%d}\n",p.xp,p.xpNext);
+    fprintf(f,"{%d}/{%d}\n",p.hp,p.maxHp);
     fprintf(f,"-- INVENTORY --\n");
     for(int i = 0;i<10;i++){
         Object o = p.inventory[i];
@@ -154,11 +172,10 @@ void savePlayer(Player p,Chest* chest){
     fprintf(f,"-- STORAGE --\n");
     Chest* current = chest;
     while(current != NULL){
-        Object o = current->object;
-        if(o.id != 0){
-            fprintf(f,"{%d}@{%d}\n",o.quantity,o.id);
-        }
-        current = current->next;
+        if(current->object.id != 0){
+            fprintf(f,"{%d}@{%d}\n",current->object.quantity,current->object.id);
+            current = current->next;
+        } 
     }
     fclose(f);
 }
@@ -185,3 +202,58 @@ void showWeaponsInInventory(Player *p) {
     }
     printf("---------------------------------------------------------\n");
 }
+
+Player chargePlayer(Npc npc){
+    char name[10];
+    printf("Entre le nom de la sauvegarde du player : ");
+    scanf("%s",name);
+    getchar();
+    char path[]= "./saves/";
+    strcat(path,name);
+    FILE* f = fopen(strcat(path,".txt"),"r");
+    Player p = initChargePlayer();
+    chargeAttribut(&p,f);
+    chargeInventory(&p,f);
+    chargeChest(npc.chest,f);
+    return p;
+}
+
+void chargeAttribut(Player* p,FILE* f){
+    fscanf(f,"=== PLAYER ===\n");
+    int level,xp,xpNext,hp,maxHp;
+    fscanf(f,"{%d}\n",&level);
+    fscanf(f,"{%d}/{%d}\n",&xp,&xpNext);
+    fscanf(f,"{%d}/{%d}\n",&hp,&maxHp);
+    p->level = level,p->xp = xp,p->xpNext = xpNext,p->hp = hp,p->maxHp = maxHp;
+    f = f;
+}
+
+void chargeInventory(Player* p,FILE* f){
+    fscanf(f,"-- INVENTORY --\n");
+    for(int i=0;i<10;i++){
+        int q =0;
+        int id = 0;
+        int du = 0;
+        fscanf(f,"{%d}@{%d}@{%d}\n",&q,&id,&du);
+        if(id != 0 ){
+            Object o = initObject(id,q);
+            o.durability = du;
+            addInventory(p->inventory,o);
+        }
+    }
+    f=f;
+}
+
+void chargeChest(Chest* chest,FILE* f){
+    fscanf(f,"-- STORAGE --\n");
+    int id = 0,q = 0;
+    while(fscanf(f,"{%d}@{%d}\n",&q,&id) != EOF){
+        Object add =initObject(id,q);
+        addObject(chest,&add);
+    }
+    
+    fclose(f);
+}
+
+
+
