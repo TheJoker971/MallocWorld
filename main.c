@@ -19,9 +19,9 @@ int main(int argc, const char* argv[]){
 
     // Autres initialisations...
 
-    // char startCommand[10];
-    // printf("Tapez 'start' pour commencer le jeu : ");
-    // scanf("%s", startCommand);
+    char startCommand[10];
+    printf("Tapez 'start' pour commencer le jeu : ");
+    scanf("%s", startCommand);
 
     if (strcmp(startCommand, "start") == 0) {
         int gameRunning = 1;
@@ -46,7 +46,8 @@ int main(int argc, const char* argv[]){
             } else {
                 printf("Entrée non valide. Veuillez réessayer.\n");
             }
-
+        }
+    }
     //         // Vérifier si le joueur est mort
     //         if (p.hp <= 0) {
     //             printf("Game Over. Le joueur est mort.\n");

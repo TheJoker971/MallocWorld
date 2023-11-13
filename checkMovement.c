@@ -10,7 +10,7 @@
 #include "player.h"
 #include "npc.h"
 
-int degat;
+int degats;
 int outil = 0;
 
 int checkMovement(int resultTab, Player p, int zone, Npc npc){
@@ -338,9 +338,9 @@ int chooseTool(Player *p){
     } while (!isValidInput);
 
     // Mettre à jour les dégâts et la durabilité de l'arme choisie
-    degat = p->inventory[outil].damage;
+    degats = p->inventory[outil].damage;
     printf("--------------------\n");
-    printf("| %d de degats     |\n", degat);
+    printf("| %d de degats     |\n", degats);
     printf("| %d de durabilité |\n", p->inventory[outil].durability);
     printf("--------------------\n\n");
 
