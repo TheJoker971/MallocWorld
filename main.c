@@ -27,7 +27,7 @@ int main(int argc, const char* argv[]){
             scanf(" %c", &depl);
 
             if (depl == 'z' || depl == 's' || depl == 'q' || depl == 'd') {
-                movePlayer(map, depl, p);
+                movePlayer(map, depl, p, npc);
                 
             } else {
                 printf("Entrée non valide. Veuillez réessayer.\n");

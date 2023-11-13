@@ -12,26 +12,26 @@
 int zone = 0;
 int compteur = 1;
 
-void movePlayer(int*** tab, char deplacement, Player player){
+void movePlayer(int*** tab, char deplacement, Player player, Npc npc){
 
     switch (deplacement) {
         case 'z':
-            moveUp(tab, player);
+            moveUp(tab, player, npc);
             drawMap(tab);
             break;
 
         case 'q':
-            moveLeft(tab, player);
+            moveLeft(tab, player, npc);
             drawMap(tab);
             break;
 
         case 'd':
-            moveRight(tab, player);
+            moveRight(tab, player, npc);
             drawMap(tab);
             break;
 
         case 's':
-            moveDown(tab, player);
+            moveDown(tab, player, npc);
             drawMap(tab);
             break;
 
@@ -42,24 +42,26 @@ void movePlayer(int*** tab, char deplacement, Player player){
 }
 
 //TOUS LES DÉPLACEMENT VERS LA GAUCHE
-void moveLeft(int*** tab, Player p){
+void moveLeft(int*** tab, Player p, Npc npc){
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             if (tab[zone][i][j] == 1) {
                 int resultTab = tab[zone][i][j - 1];
                  if (compteur != 0 && checkCase(resultTab, p) != 0) {
-                    moveLeftZone(tab, i, j, p);
+                    moveLeftZone(tab, i, j, p, npc);
                 } else compteur = 1;
             }
         }
     }
 }
 
-void moveLeftZone(int*** tab, int i, int j, Player p){
+void moveLeftZone(int*** tab, int i, int j, Player p, Npc npc){
     int resultTab = tab[zone][i][j - 1];
     tab[zone][i][j] = 0;
-    if(checkMovement(resultTab) == 2){
-        if (zone == 0){
+
+    switch(checkMovement(resultTab, p, zone, npc)){
+        case 2: 
+            if (zone == 0){
             zone = 1;
             zoneTravelLeftZone1To2(tab, zone);
         } else if (zone == 1){
@@ -68,9 +70,8 @@ void moveLeftZone(int*** tab, int i, int j, Player p){
             zoneTravelLeftZone1To2(tab, zone);
         }
             break;
-
-    } else if(checkMovement(resultTab) == 3){
-        if (zone == 1) {
+        case 3:
+            if (zone == 1) {
             zone = 2;
             zoneTravelLeftZone2To3(tab, zone);
         } else if(zone ==2){
@@ -87,27 +88,30 @@ void moveLeftZone(int*** tab, int i, int j, Player p){
             tab[zone][i][j] = 1;
         }
     }
+
 }
 
 //TOUS LES DÉPLACEMENT VERS LA DROITE
-void moveRight(int*** tab, Player p){
+void moveRight(int*** tab, Player p, Npc npc){
     for (int i = 0; i < height; i++) {
         for (int j = width; j >=0; j--) {
             int resultTab = tab[zone][i][j+1];
             if (tab[zone][i][j] == 1 && checkCase(resultTab, p) != 0) {
                 if ( compteur != 0){
-                    moveRightZone(tab, i, j, p);
+                    moveRightZone(tab, i, j, p, npc);
                 } else compteur = 1;
             }
         }
     }
 }
 
-void moveRightZone(int*** tab,int i,int j, Player p){
+void moveRightZone(int*** tab,int i,int j, Player p, Npc npc){
     int resultTab = tab[zone][i][j+1];
     tab[zone][i][j] = 0;
-    if(checkMovement(resultTab) == 2){
-        if (zone == 0){
+
+    switch(checkMovement(resultTab, p, zone, npc)){
+        case 2: 
+            if (zone == 0){
             zone = 1;
             zoneTravelRightZone1To2(tab, zone);
         } else if (zone == 1){
@@ -115,8 +119,10 @@ void moveRightZone(int*** tab,int i,int j, Player p){
             zone = 0;
             zoneTravelRightZone1To2(tab, zone);
         }
-    } else if(checkMovement(resultTab) == 3){
-        if (zone == 1){
+            break;
+
+        case 3:
+            if (zone == 1){
             zone = 2;
             zoneTravelRightZone2To3(tab, zone);
         } else if (zone == 2){
@@ -133,42 +139,44 @@ void moveRightZone(int*** tab,int i,int j, Player p){
             tab[zone][i][j] = 1;
         }
             break;
-    }
+    }    
 }
 
 
 //TOUS LES DÉPLACEMENT VERS LE HAUT
-void moveUp(int*** tab, Player p){
+void moveUp(int*** tab, Player p, Npc npc){
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             if (tab[zone][i][j] == 1 ) {
                 if ( compteur != 0) {
-                    moveUpZone(tab, i, j, p);
+                    moveUpZone(tab, i, j, p, npc);
                 } else compteur = 1;
             }
         }
     }
 }
 
-void moveUpZone(int*** tab,int i,int j, Player p){
+void moveUpZone(int*** tab,int i,int j, Player p, Npc npc){
     if( i > 1){
         int resultTab = tab[zone][i - 1][j];
         if(checkCase(resultTab, p) != 0){
-            moveUpZoneInside(tab, i, j, p);
+            moveUpZoneInside(tab, i, j, p, npc);
         }
     } else{
         int resultTab = tab[zone][0][j];
         if(checkCase(resultTab, p) != 0){
-            moveUpZoneBorder(tab, i, j, p);
+            moveUpZoneBorder(tab, i, j, p, npc);
         }
     }
 }
 
-void moveUpZoneInside(int*** tab, int i, int j, Player p){
+void moveUpZoneInside(int*** tab, int i, int j, Player p, Npc npc){
     int resultTab = tab[zone][i - 1][j];
     tab[zone][i][j] = 0;
-    if(checkMovement(resultTab) == 2){
-        if (zone == 0){
+
+    switch(checkMovement(resultTab, p, zone, npc)){
+        case 2: 
+            if (zone == 0){
             zone = 1;
             zoneTravelUpZone1To2(tab, zone);
         } else if (zone == 1){
@@ -176,8 +184,10 @@ void moveUpZoneInside(int*** tab, int i, int j, Player p){
             zone = 0;
             zoneTravelUpZone1To2(tab, zone);
         }
-    } else if(checkMovement(resultTab) == 3){
-        if (zone == 1){
+            break;
+
+        case 3:
+            if (zone == 1){
             zone = 2;
             zoneTravelUpZone2To3(tab, zone);
         } else if (zone == 2){
@@ -188,17 +198,18 @@ void moveUpZoneInside(int*** tab, int i, int j, Player p){
             break;
 
         default:
-        tab[zone][i - 1][j] = 1;
+            tab[zone][i - 1][j] = 1;
             break;
-    }
-
+    } 
 }
 
-void moveUpZoneBorder (int*** tab, int i, int j, Player p){
+void moveUpZoneBorder (int*** tab, int i, int j, Player p, Npc npc){
     int resultTab = tab[zone][0][j];
     tab[zone][i][j] = 0;
-    if(checkMovement(resultTab) == 2){
-        if (zone == 0){
+
+    switch(checkMovement(resultTab, p, zone, npc)){
+        case 2: 
+            if (zone == 0){
             zone = 1;
             zoneTravelUpZone1To2(tab, zone);
         } else if (zone == 1){
@@ -206,8 +217,10 @@ void moveUpZoneBorder (int*** tab, int i, int j, Player p){
             zone = 0;
             zoneTravelUpZone1To2(tab, zone);
         }
-    } else if(checkMovement(resultTab) == 3){
-        if (zone == 1){
+            break;
+
+        case 3:
+            if (zone == 1){
             zone = 2;
             zoneTravelUpZone2To3(tab, zone);
         } else if (zone == 2){
@@ -218,10 +231,10 @@ void moveUpZoneBorder (int*** tab, int i, int j, Player p){
             break;
 
         default:
-        tab[zone][i][j] = 0;
-        tab[zone][height - height][j] = 1;
+            tab[zone][i][j] = 0;
+            tab[zone][height - height][j] = 1;
             break;
-    }
+    } 
 }
 
 
@@ -230,37 +243,39 @@ void moveUpZoneBorder (int*** tab, int i, int j, Player p){
 
 
 // TOUS LES DÉPLACEMENTS VERS LE BAS
-void moveDown(int*** tab, Player p){
+void moveDown(int*** tab, Player p, Npc npc){
     for (int i = height-1; i >= 0; i--) {
         for (int j = 0; j < width; j++) {
             if (tab[zone][i][j] == 1 ) {
                 if ( compteur != 0){
-                    moveDownZone(tab, i, j, p);
+                    moveDownZone(tab, i, j, p, npc);
                 } else compteur = 1;
             }
         }
     }
 }
 
-void moveDownZone(int*** tab, int i, int j, Player p){
+void moveDownZone(int*** tab, int i, int j, Player p, Npc npc){
         if (i < height - 2){
             int resultTab = tab[zone][i + 1][j];
             if(checkCase(resultTab, p) != 0) {
-                moveDownZoneInside(tab, i, j, p);
+                moveDownZoneInside(tab, i, j, p, npc);
             }
         } else {
             int resultTab = tab[zone][height - 1][j];
             if(checkCase(resultTab, p) != 0) {
-                moveDownZoneBorder(tab, i, j, p);
+                moveDownZoneBorder(tab, i, j, p, npc);
             }
         }
 }
 
-void moveDownZoneInside(int*** tab, int i, int j, Player p){
+void moveDownZoneInside(int*** tab, int i, int j, Player p, Npc npc){
     int resultTab = tab[zone][i + 1][j];
     tab[zone][i][j] = 0;
-    if(checkMovement(resultTab) == 2){
-        if (zone == 0) {
+
+    switch(checkMovement(resultTab, p, zone, npc)){
+        case 2: 
+            if (zone == 0) {
             zone = 1;
             zoneTravelDownZone1To2(tab, zone);
         } else if (zone == 1) {
@@ -268,29 +283,31 @@ void moveDownZoneInside(int*** tab, int i, int j, Player p){
             zone = 0;
             zoneTravelDownZone1To2(tab, zone);
         }
-    } else if(checkMovement(resultTab) == 3){
-        if (zone == 1) {
+            break;
+
+        case 3:
+            if (zone == 1) {
             compteur = 0;
             zone = 2;
             zoneTravelDownZone2To3(tab, zone);
         } else if (zone == 2) {
             compteur = 0;
             zone = 1;
-            zoneTravelDownZone2To3(tab, zone);
         }
             break;
-
         default:
-        tab[zone][i+1][j] = 1;
+           tab[zone][i+1][j] = 1;
             break;
-    }
+    } 
 }
 
-void moveDownZoneBorder(int*** tab, int i , int j, Player p){
+void moveDownZoneBorder(int*** tab, int i , int j, Player p, Npc npc){
     int resultTab = tab[zone][height - 1][j];
     tab[zone][i][j] = 0;
-    if(checkMovement(resultTab) == 2){
-        if (zone == 0) {
+
+    switch(checkMovement(resultTab, p, zone, npc)){
+        case 2: 
+            if (zone == 0) {
             compteur = 0;
             zone = 1;
             zoneTravelDownZone1To2(tab, zone);
@@ -299,8 +316,10 @@ void moveDownZoneBorder(int*** tab, int i , int j, Player p){
             zone = 0;
             zoneTravelDownZone1To2(tab, zone);
         }
-    } else if(checkMovement(resultTab) == 3){
-        if (zone == 1) {
+            break;
+
+        case 3:
+            if (zone == 1) {
             compteur = 0;
             zone = 2;
             zoneTravelDownZone2To3(tab, zone);
@@ -312,8 +331,8 @@ void moveDownZoneBorder(int*** tab, int i , int j, Player p){
             break;
 
         default:
-        tab[zone][height - 1][j] = 1;
+            tab[zone][height - 1][j] = 1;
             break;
-    }
+    } 
 }
 

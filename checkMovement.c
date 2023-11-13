@@ -7,8 +7,10 @@
 #include "movePlayer.h"
 #include <stdlib.h>
 #include "monsters.h"
+#include "player.h"
+#include "npc.h"
 
-int checkMovement(int resultTab, Player p, int zone){
+int checkMovement(int resultTab, Player p, int zone, Npc npc){
     char yesNo;
     int result = 0;
     srand((unsigned int)time(NULL));
@@ -22,58 +24,59 @@ int checkMovement(int resultTab, Player p, int zone){
 
         case 2:
             printf("\n\n\nHello, je suis le PNJ\n\n\n");
+            //pnjMenu(p, npc);
             break;
 
         case 3:
             printf("\n\n\nPlante\n\n\n");
             // addInventory(Object*,Object) Object* = Player.inventory, Object = initObject(id,quantity)
-            addInventory(p.inventory, initObject(7,nb,0,0));
+            addInventory(p.inventory, initObject(7,nb));
             showInventory(p);
             break;
 
         case 4:
             printf("\n\n\nPierre\n\n\n");
-            addInventory(p.inventory, initObject(6,nb,0,0));
+            addInventory(p.inventory, initObject(6,nb));
             break;
 
         case 5:
             printf("\n\n\nSapin\n\n\n");
-            addInventory(p.inventory, initObject(5,nb,0,0));
+            addInventory(p.inventory, initObject(5,nb));
             break;
 
         case 6:
             printf("\n\n\nLavande\n\n\n");
-            addInventory(p.inventory, initObject(18,nb,0,0));
+            addInventory(p.inventory, initObject(18,nb));
             showInventory(p);
             break;
 
         case 7:
             printf("\n\n\nFer\n\n\n");
-            addInventory(p.inventory, initObject(17,nb,0,0));
+            addInventory(p.inventory, initObject(17,nb));
             showInventory(p);
             break;
 
         case 8:
             printf("\n\n\nHetre\n\n\n");
-            addInventory(p.inventory, initObject(16,nb,0,0));
+            addInventory(p.inventory, initObject(16,nb));
             showInventory(p);
             break;
 
         case 9:
             printf("\n\n\nChanvre\n\n\n");
-            addInventory(p.inventory, initObject(29,nb,0,0));
+            addInventory(p.inventory, initObject(29,nb));
             showInventory(p);
             break;
 
         case 10:
             printf("\n\n\nDiamant\n\n\n");
-            addInventory(p.inventory, initObject(28,nb,0,0));
+            addInventory(p.inventory, initObject(28,nb));
             showInventory(p);
             break;
 
         case 11:
             printf("\n\n\nChene\n\n\n");
-            addInventory(p.inventory, initObject(27,nb,0,0));
+            addInventory(p.inventory, initObject(27,nb));
             showInventory(p);
             break;
 
@@ -164,4 +167,23 @@ int portailOpenClose2(int result){
             result = 0;
         }
         return result;
+}
+
+void pnjMenu(Player p, Npc npc){
+    int menuChoice;
+    printf("Que veux-tu faire ?");
+    switch (menuChoice) {
+        case 37:
+            break;
+        default:
+            break;
+    }
+
+
+// repair 
+// repair(p.inventory)
+
+//craft
+// craftObject(npc.crafts, p)
+
 }

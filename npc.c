@@ -53,6 +53,7 @@ void repair(Object* inv){
             inv[i] = initObject(inv[i].id,1);
         }
     }
+    printf("Vos Outils/Armes ont été réparé\n");
 }
 
 void freeNpc(Npc npc){
