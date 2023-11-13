@@ -154,7 +154,7 @@ void freePlayer(Player p){
 }
 
 void savePlayer(Player p,Chest* chest){
-    char name[10];
+    char name[30];
     char path[]="./saves/";
     printf("Entrer le nom de la sauvegarde du player : ");
     scanf("%s",name);
@@ -204,7 +204,7 @@ void showWeaponsInInventory(Player *p) {
 }
 
 Player chargePlayer(Npc npc){
-    char name[10];
+    char name[30];
     printf("Entre le nom de la sauvegarde du player : ");
     scanf("%s",name);
     getchar();
