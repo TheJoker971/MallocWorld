@@ -185,3 +185,15 @@ void showWeaponsInInventory(Player *p) {
     }
     printf("---------------------------------------------------------\n");
 }
+
+void showToolsInInventory(Player *p) {
+    printf("Outils dans l'inventaire :\n");
+    printf("---------------------------- OUTILS ----------------------\n");
+    for (int i = 0; i < 10; i++) {
+        if (isTools(p->inventory[i].id)) {
+            printf("| Emplacement %02d | Outil ID %02d | Degats %02d | Durabilité %02d |\n", 
+                   i + 1, p->inventory[i].id, p->inventory[i].damage, p->inventory[i].durability);
+        }
+    }
+    printf("---------------------------------------------------------\n");
+}

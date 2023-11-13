@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "monsters.h"
+#include "npc.h"
 int degat;
 int weapon;
 int skip = 1;
@@ -16,21 +17,21 @@ int initMonster(int id, Player p) {
     if (id >= 12 && id < 20) {
         Monster demon;
         demon.name = "Cyclope";
-        demon.pv = 100;
-        demon.experience = 5;
+        demon.pv = 50;
+        demon.experience = 2;
         printf("LE monstre s'appelle : %s\n", demon.name);
         result = combatMonstre(&demon, &p);
     } else if (id >= 20 && id < 40){
         Monster demon;
         demon.name = "Monstre de feu\n";
-        demon.pv = 130;
+        demon.pv = 70;
         demon.experience = 10;
         printf("LE monstre s'appelle : %s\n", demon.name);
         result = combatMonstre(&demon, &p);
     } else if (id >= 40 && id < 60){
         Monster demon;
         demon.name = "Monstre d'eau\n";
-        demon.pv = 160;
+        demon.pv = 110;
         demon.experience = 15;
         printf("LE monstre s'appelle : %s\n", demon.name);
         result = combatMonstre(&demon, &p);
@@ -39,6 +40,13 @@ int initMonster(int id, Player p) {
         demon.name = "Monstre de terre\n";
         demon.pv = 200;
         demon.experience = 20;
+        printf("LE monstre s'appelle : %s\n", demon.name);
+        result = combatMonstre(&demon, &p);
+    } else if (id == 99){
+        Monster demon;
+        demon.name = "Monstre de terre\n";
+        demon.pv = 250;
+        demon.experience = 25;
         printf("LE monstre s'appelle : %s\n", demon.name);
         result = combatMonstre(&demon, &p);
     }
@@ -256,7 +264,7 @@ void sauvegarderHP(Player *p) {
     }
     fprintf(file, "%d", p->hp); // Écrit les HP du joueur dans le fichier
     fclose(file); // Ferme le fichier
-    printf("Les points de vie ont été sauvegardés.\n");
+    //printf("Les points de vie ont été sauvegardés.\n");
 }
 
 int chargerHPSauvegarde(Player *p) {
@@ -268,7 +276,7 @@ int chargerHPSauvegarde(Player *p) {
     }
     if (fscanf(file, "%d", &hp_sauvegarde) == 1) {
         p->hp = hp_sauvegarde; // Attribue la valeur lue aux HP du joueur
-        printf("Les points de vie ont été chargés : %d\n", p->hp);
+        //printf("Les points de vie ont été chargés : %d\n", p->hp);
     } else {
         printf("Erreur lors de la lecture des points de vie sauvegardés.\n");
         fclose(file);

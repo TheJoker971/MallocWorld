@@ -81,6 +81,10 @@ void moveLeftZone(int*** tab, int i, int j, Player p, Npc npc){
         }
             break;
 
+        case 1:
+            tab[zone][i][j] = 1;
+            break;
+
         default:
             if(j>0){
             tab[zone][i][j-1] = 1;
@@ -130,6 +134,10 @@ void moveRightZone(int*** tab,int i,int j, Player p, Npc npc){
             zone = 1;
             zoneTravelRightZone2To3(tab, zone);
         }
+            break;
+
+        case 1:
+            tab[zone][i][j] = 1;
             break;
 
         default:
@@ -197,6 +205,10 @@ void moveUpZoneInside(int*** tab, int i, int j, Player p, Npc npc){
         }
             break;
 
+        case 1:
+            tab[zone][i][j] = 1;
+            break;
+
         default:
             tab[zone][i - 1][j] = 1;
             break;
@@ -228,6 +240,10 @@ void moveUpZoneBorder (int*** tab, int i, int j, Player p, Npc npc){
             zone = 1;
             zoneTravelUpZone2To3(tab, zone);
         }
+            break;
+
+        case 1:
+            tab[zone][i][j] = 1;
             break;
 
         default:
@@ -295,6 +311,11 @@ void moveDownZoneInside(int*** tab, int i, int j, Player p, Npc npc){
             zone = 1;
         }
             break;
+
+        case 1:
+            tab[zone][i][j] = 1;
+            break;
+
         default:
            tab[zone][i+1][j] = 1;
             break;
@@ -328,6 +349,10 @@ void moveDownZoneBorder(int*** tab, int i , int j, Player p, Npc npc){
             zone = 1;
             zoneTravelDownZone2To3(tab, zone);
         }
+            break;
+
+        case 1:
+            tab[zone][i][j] = 1;
             break;
 
         default:
