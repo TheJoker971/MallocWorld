@@ -19,8 +19,8 @@ typedef struct Result
     Monster monster;
 } Result;
 
-int initMonster(int, Player p);
-int combatMonstre(Monster *monster, Player *p);
+int initMonster(int, Player p, int zone);
+int combatMonstre(Monster *monster, Player *p, int zone);
 int chooseArmeAfter(Player *p);
 int chooseArme(Player *p);
 void firstAttaque(Player *p, Monster *monster);
@@ -36,4 +36,10 @@ int verifyDurability(Player *p);
 void levelZone();
 int myLevel();
 void showWeaponsInInventory(Player *p);
+void potion(Player *p, int zone);
+void potion2(Player *p, int zone);
+void potion3(Player *p, int zone);
+void drinkPotion(Player *p, int zone);
+int choosePotion(Player *p);
+int verifyQuantity(Player *p);
 #endif //MALLOCWORLD_MONSTERS_H

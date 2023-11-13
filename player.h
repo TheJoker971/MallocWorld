@@ -35,5 +35,7 @@ Player chargePlayer(Npc);
 void chargeAttribut(Player*,FILE*);
 void chargeInventory(Player*,FILE*);
 void chargeChest(Chest*,FILE*);
+void showToolsInInventory(Player *p);
+void showPotionInInventory(Player *p);
 
 #endif

@@ -11,10 +11,11 @@ int main(int argc, const char* argv[]){
     // Initialisation de la map, du npc et du joueur
     int*** map = initMap();
     Npc npc = initNpc();
-    Player p2 = chargePlayer(npc);
-    
-    showChest(npc.chest);
-    showInventory(p2);
+    Player p = initPlayer();
+    sauvegarderHP(&p);
+    addInventory(p.inventory, initObject(30, 30));
+    addInventory(p.inventory, initObject(34, 30));
+    int deplacement = 0;
 
     // Autres initialisations...
 
@@ -22,19 +23,29 @@ int main(int argc, const char* argv[]){
     // printf("Tapez 'start' pour commencer le jeu : ");
     // scanf("%s", startCommand);
 
-    // if (strcmp(startCommand, "start") == 0) {
-    //     int gameRunning = 1;
-    //     while (gameRunning && p.hp > 0) {
-    //         char depl;
-    //         printf("Entrer un truc : ");
-    //         scanf(" %c", &depl);
+    if (strcmp(startCommand, "start") == 0) {
+        int gameRunning = 1;
+        char quit;
+        drawMap(map);
+        while (gameRunning && p.hp > 0 ) {
+            char depl;
+            printf("\nDeplacez-vous avec z q s d :\n");
+            scanf(" %c", &depl);
 
-    //         if (depl == 'z' || depl == 's' || depl == 'q' || depl == 'd') {
-    //             movePlayer(map, depl, p, npc);
-                
-    //         } else {
-    //             printf("Entrée non valide. Veuillez réessayer.\n");
-    //         }
+            if (depl == 'z' || depl == 's' || depl == 'q' || depl == 'd') {
+                movePlayer(map, depl, p, npc);
+                chargerHPSauvegarde(&p);
+                deplacement ++ ;
+                if (deplacement == 15){
+                    reloadMap(map);
+                    deplacement = 0;
+                }
+            } else if (depl == ';'){
+                printf("Vous quitter la partie");
+                gameRunning = 0;
+            } else {
+                printf("Entrée non valide. Veuillez réessayer.\n");
+            }
 
     //         // Vérifier si le joueur est mort
     //         if (p.hp <= 0) {
