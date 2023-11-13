@@ -205,7 +205,7 @@ void showWeaponsInInventory(Player *p) {
 
 Player chargePlayer(Npc npc){
     char name[30];
-    printf("Entre le nom de la sauvegarde du player : ");
+    printf("Entre le nom de la sauvegarde du player a charger : ");
     scanf("%s",name);
     getchar();
     char path[]= "./saves/";

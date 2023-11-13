@@ -290,7 +290,7 @@ int*** chargeMap(){
     int*** map = malloc(sizeof(int**)*3);
     char name[30];
     char path[]="./saves/";
-    printf("Entrer le nom de la sauvegarde de la map : ");
+    printf("Entrer le nom de la sauvegarde de la map a charger : ");
     scanf("%s",name);
     strcat(name,".txt"),strcat(path,name);
     for(int i =0;i<3;i++){
