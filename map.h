@@ -36,7 +36,7 @@ void preSaveMap(int**[]);
 void drawInFile(FILE*,int**);
 int percent();
 void saveMap(int** []);
-int*** chargeMap(char[]);
+int*** chargeMap();
 void chargePart(int,int**,FILE*);
 void reloadMap(int** []);
 

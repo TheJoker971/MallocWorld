@@ -35,7 +35,7 @@ Object initObject(int id,int q){
             return tab[i];
         }
     }
-    return initObject(0,0);
+    return blankObject();
 }
 
 int isRessource(int id){

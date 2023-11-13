@@ -4,13 +4,11 @@
 #include "map.h"
 
 void saveMap(int** map[]){
-    char name[10];
+    char name[30];
     char path[]="./saves/";
-    printf("Entrer le nom de la sauvegarde : ");
+    printf("Entrer le nom de la sauvegarde de la map : ");
     scanf("%s",name);
-    getchar();
-    strcat(name,".txt");
-    strcat(path,name);
+    strcat(name,".txt"),strcat(path,name);
     FILE* f = fopen(path,"w+");
     while(f != NULL){
         fprintf(f,"=== MAP ===\n");
@@ -234,7 +232,7 @@ void drawInFile(FILE* f,int** map){
 }
 
 void preSaveMap(int** map[]){
-    FILE* file = fopen("./saves/presave.txt","w+");
+    FILE* file = fopen("./presave.txt","w+");
     while(file != NULL){
         fprintf(file,"=== MAP ===\n");
         for(int i=0;i<3;i++){
@@ -288,18 +286,24 @@ void chargePart(int n,int** part,FILE* file){
     fclose(file);
 }
 
-int*** chargeMap(char name[]){
+int*** chargeMap(){
     int*** map = malloc(sizeof(int**)*3);
+    char name[30];
+    char path[]="./saves/";
+    printf("Entrer le nom de la sauvegarde de la map a charger : ");
+    scanf("%s",name);
+    strcat(name,".txt"),strcat(path,name);
     for(int i =0;i<3;i++){
         map[i] = allowMemory();
-        FILE* file = fopen(name,"r");
+        FILE* file = fopen(path,"r");
         chargePart(i,map[i],file);
     }
+    preSaveMap(map);
     return map;
 }
 
 void reloadMap(int** map[]){
-    int*** presave= chargeMap("./saves/presave.txt");
+    int*** presave= chargeMap("./presave.txt");
     for(int z = 0;z<3;z++){
         for(int h=0;h<height;h++){
             for(int w=0;w<width;w++){
