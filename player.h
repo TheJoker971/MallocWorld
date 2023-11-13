@@ -29,5 +29,6 @@ void savePlayer(Player,Chest*);
 void initSauvegarderHP(Player *p);
 void showWeaponsInInventory(Player *p);
 void showToolsInInventory(Player *p);
+void showPotionInInventory(Player *p);
 
 #endif

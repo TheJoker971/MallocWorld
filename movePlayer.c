@@ -47,7 +47,7 @@ void moveLeft(int*** tab, Player p, Npc npc){
         for (int j = 0; j < width; j++) {
             if (tab[zone][i][j] == 1) {
                 int resultTab = tab[zone][i][j - 1];
-                 if (compteur != 0 && checkCase(resultTab, p) != 0) {
+                 if (compteur != 0 && checkCase(resultTab, p, zone) != 0) {
                     moveLeftZone(tab, i, j, p, npc);
                 } else compteur = 1;
             }
@@ -100,7 +100,7 @@ void moveRight(int*** tab, Player p, Npc npc){
     for (int i = 0; i < height; i++) {
         for (int j = width; j >=0; j--) {
             int resultTab = tab[zone][i][j+1];
-            if (tab[zone][i][j] == 1 && checkCase(resultTab, p) != 0) {
+            if (tab[zone][i][j] == 1 && checkCase(resultTab, p, zone) != 0) {
                 if ( compteur != 0){
                     moveRightZone(tab, i, j, p, npc);
                 } else compteur = 1;
@@ -167,12 +167,12 @@ void moveUp(int*** tab, Player p, Npc npc){
 void moveUpZone(int*** tab,int i,int j, Player p, Npc npc){
     if( i > 1){
         int resultTab = tab[zone][i - 1][j];
-        if(checkCase(resultTab, p) != 0){
+        if(checkCase(resultTab, p, zone) != 0){
             moveUpZoneInside(tab, i, j, p, npc);
         }
     } else{
         int resultTab = tab[zone][0][j];
-        if(checkCase(resultTab, p) != 0){
+        if(checkCase(resultTab, p, zone) != 0){
             moveUpZoneBorder(tab, i, j, p, npc);
         }
     }
@@ -274,12 +274,12 @@ void moveDown(int*** tab, Player p, Npc npc){
 void moveDownZone(int*** tab, int i, int j, Player p, Npc npc){
         if (i < height - 2){
             int resultTab = tab[zone][i + 1][j];
-            if(checkCase(resultTab, p) != 0) {
+            if(checkCase(resultTab, p, zone) != 0) {
                 moveDownZoneInside(tab, i, j, p, npc);
             }
         } else {
             int resultTab = tab[zone][height - 1][j];
-            if(checkCase(resultTab, p) != 0) {
+            if(checkCase(resultTab, p, zone) != 0) {
                 moveDownZoneBorder(tab, i, j, p, npc);
             }
         }

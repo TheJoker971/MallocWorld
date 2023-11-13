@@ -14,6 +14,8 @@ int main(int argc, const char* argv[]){
     Player p = initPlayer();
     sauvegarderHP(&p);
     addInventory(p.inventory, initObject(30, 30));
+    addInventory(p.inventory, initObject(34, 30));
+    int deplacement = 0;
 
     // Autres initialisations...
 
@@ -25,7 +27,7 @@ int main(int argc, const char* argv[]){
         int gameRunning = 1;
         char quit;
         drawMap(map);
-        while (gameRunning && p.hp > 0 && quit != 'q') {
+        while (gameRunning && p.hp > 0 ) {
             char depl;
             printf("\nDeplacez-vous avec z q s d :\n");
             scanf(" %c", &depl);
@@ -33,7 +35,14 @@ int main(int argc, const char* argv[]){
             if (depl == 'z' || depl == 's' || depl == 'q' || depl == 'd') {
                 movePlayer(map, depl, p, npc);
                 chargerHPSauvegarde(&p);
-                
+                deplacement ++ ;
+                if (deplacement == 15){
+                    reloadMap(map);
+                    deplacement = 0;
+                }
+            } else if (depl == ';'){
+                printf("Vous quitter la partie");
+                gameRunning = 0;
             } else {
                 printf("Entrée non valide. Veuillez réessayer.\n");
             }

@@ -8,10 +8,11 @@
 #include "npc.h"
 int degat;
 int weapon;
+int myPotion;
 int skip = 1;
 int level = 3;
 
-int initMonster(int id, Player p) {
+int initMonster(int id, Player p, int zone) {
     int result = 0;
 
     if (id >= 12 && id < 20) {
@@ -20,40 +21,40 @@ int initMonster(int id, Player p) {
         demon.pv = 50;
         demon.experience = 2;
         printf("LE monstre s'appelle : %s\n", demon.name);
-        result = combatMonstre(&demon, &p);
+        result = combatMonstre(&demon, &p, zone);
     } else if (id >= 20 && id < 40){
         Monster demon;
         demon.name = "Monstre de feu\n";
         demon.pv = 70;
         demon.experience = 10;
         printf("LE monstre s'appelle : %s\n", demon.name);
-        result = combatMonstre(&demon, &p);
+        result = combatMonstre(&demon, &p, zone);
     } else if (id >= 40 && id < 60){
         Monster demon;
         demon.name = "Monstre d'eau\n";
         demon.pv = 110;
         demon.experience = 15;
         printf("LE monstre s'appelle : %s\n", demon.name);
-        result = combatMonstre(&demon, &p);
+        result = combatMonstre(&demon, &p, zone);
     } else if (id >= 60 && id < 99){
         Monster demon;
         demon.name = "Monstre de terre\n";
         demon.pv = 200;
         demon.experience = 20;
         printf("LE monstre s'appelle : %s\n", demon.name);
-        result = combatMonstre(&demon, &p);
+        result = combatMonstre(&demon, &p, zone);
     } else if (id == 99){
         Monster demon;
         demon.name = "Monstre de terre\n";
         demon.pv = 250;
         demon.experience = 25;
         printf("LE monstre s'appelle : %s\n", demon.name);
-        result = combatMonstre(&demon, &p);
+        result = combatMonstre(&demon, &p, zone);
     }
     return result;
 }
 
-int combatMonstre(Monster *monster, Player *p) {
+int combatMonstre(Monster *monster, Player *p, int zone) {
     int result = 0;
     char yesNo;
     int choix;
@@ -85,9 +86,12 @@ int combatMonstre(Monster *monster, Player *p) {
 
                 case 2:
                     printf("POTION");
+                    choosePotion(p);
+                    drinkPotion(p, zone);
                     break;
 
                 case 3:
+                    choosePotion(p);
                     fuir(p);
                     break;
 
@@ -287,11 +291,26 @@ int chargerHPSauvegarde(Player *p) {
 }
 
 void levelingHP(Player *p){
-    if(level == 2) p->hp = 110;
-    if(level == 3) p->hp = 120;
-    if(level == 4) p->hp = 130;
-    if(level == 5) p->hp = 140;
-    if(level >= 6 && level <= 8) p->hp = 150;
+    if(level == 2) {
+        p->hp = 110;
+        p->maxHp = 110;
+    }
+    if(level == 3) {
+        p->hp = 120;
+        p->maxHp = 120;
+    }
+    if(level == 4) {
+        p->hp = 130;
+        p->maxHp = 130;
+    }
+    if(level == 5) {
+        p->hp = 140;
+        p->maxHp = 140;
+    }
+    if(level >= 6 && level <= 8) {
+        p->hp = 150;
+        p->maxHp = 150;
+    }
     sauvegarderHP(p);
     printf("Tu est passer à %d de point de vie\n", p->hp);
 }
@@ -320,4 +339,100 @@ void levelZone(){
 int myLevel(){
     int niveau = level;
     return level;
+}
+
+void potion(Player *p, int zone){
+    switch(p->inventory[myPotion].id) {
+            case 14: 
+                if(p->hp + 30 > p->maxHp){
+                    p->hp = p->maxHp;
+                } else{
+                     p->hp = p->hp + 30;
+                }
+                p->inventory[myPotion].quantity = p->inventory[myPotion].quantity - (1);
+                break;
+
+            case 25: 
+                if(p->hp + 80 > p->maxHp){
+                    p->hp = p->maxHp;
+                } else{
+                     p->hp = p->hp + 80;
+                }
+                p->inventory[myPotion].quantity = p->inventory[myPotion].quantity - (1);
+                break;
+
+            case 34: 
+                if(p->hp + 200 > p->maxHp){
+                    p->hp = p->maxHp;
+                } else{
+                     p->hp = p->hp + 200;
+                }
+                p->inventory[myPotion].quantity = p->inventory[myPotion].quantity - (1);
+                sauvegarderHP(p);
+                break;
+
+        }
+        printf("Tu bois ta potion !\n");
+}
+
+
+void drinkPotion(Player *p, int zone){
+    chargerHPSauvegarde(p);
+    if (p->inventory[myPotion].quantity > 0 ){
+        potion(p, zone);
+    } else if (p->inventory[myPotion].quantity <= 0){
+        printf("\nVotre potion est vide\n");
+        choosePotion(p);
+    }
+    sauvegarderHP(p);
+    printf("MON PV %d", p->hp);
+}
+
+int choosePotion(Player *p){
+    if(verifyQuantity(p) == 1){
+        printf("Vous n'avez plus aucune potion\n");
+        return 1;
+    }
+    verifyQuantity(p);
+    showPotionInInventory(p);
+    //showInventory(*p);
+
+    int isValidInput;
+    do {
+        printf("Quelle Potion veux-tu ? (Entrez un nombre) :\n");
+        isValidInput = scanf("%d", &myPotion);
+
+        // Vider le buffer d'entrée si l'utilisateur n'a pas entré un nombre
+        if (!isValidInput) {
+            printf("Erreur de saisie. Veuillez entrer un nombre.\n");
+            while (getchar() != '\n'); 
+            continue;
+        }
+
+        myPotion -= 1;
+
+        // Vérifier si l'entrée correspond à une arme valide
+        if (potion < 0 || !isHealth(p->inventory[myPotion].id)) {
+            printf("Ce n'est pas une potion valide. Veuillez ressaisir.\n");
+            isValidInput = 0; // Réinitialiser la validité de l'entrée
+        }
+    } while (!isValidInput);
+
+    // Mettre à jour les dégâts et la durabilité de l'arme choisie
+    printf("--------------------\n");
+    printf("| %d (quantité) |\n", p->inventory[myPotion].quantity);
+    printf("--------------------\n\n");
+
+    return 0;
+}
+
+int verifyQuantity(Player *p){
+    for(int i = 0; i<10; i++){
+        if(isHealth(p->inventory[i].id)){
+            if(p->inventory[i].quantity > 0){
+                return 0;
+            } 
+        }
+    }
+    return 1;
 }

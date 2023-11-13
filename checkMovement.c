@@ -185,12 +185,12 @@ int checkMovement(int resultTab, Player p, int zone, Npc npc){
 }
 
 
-int checkCase(int resultTab, Player player){
+int checkCase(int resultTab, Player player, int zone){
     char yesNo;
     int result;
 
     if (resultTab >= 12 && resultTab <= 98){
-        result = initMonster(resultTab, player);
+        result = initMonster(resultTab, player, zone);
     } else if ( resultTab == -1) {
         result = 0;
     } else if ( resultTab == -2) {

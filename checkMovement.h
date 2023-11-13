@@ -6,7 +6,7 @@
 #define MALLOCWORLD_CHECKMOVEMENT_H
 #include "player.h"
 int checkMovement(int, Player, int, Npc npc);
-int checkCase(int, Player);
+int checkCase(int, Player, int zone);
 int portailOpenClose1(int);
 int portailOpenClose2(int result);
 void pnjMenu(Player p, Npc npc);
