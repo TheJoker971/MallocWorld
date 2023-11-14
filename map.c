@@ -301,19 +301,30 @@ int*** chargeMap(){
     preSaveMap(map);
     return map;
 }
+int*** chargeDefaultMap(char path[]){
+    int*** map = malloc(sizeof(int**)*3);
+    for(int i =0;i<3;i++){
+        map[i] = allowMemory();
+        FILE* file = fopen(path,"r");
+        chargePart(i,map[i],file);
+    }
+    return map;
 
-void reloadMap(int** map[]){
-    int*** presave= chargeMap("./presave.txt");
+}
+int*** reloadMap(int** map[]){
+    int*** presave= chargeDefaultMap("./presave.txt");
+    int*** now = map;
     for(int z = 0;z<3;z++){
         for(int h=0;h<height;h++){
             for(int w=0;w<width;w++){
-                if(presave[z][h][w] != map[z][h][w] && map[z][h][w]==0 && presave[z][h][w]!=1){
-                    map[z][h][w] = presave[z][h][w];
+                if(presave[z][h][w] != now[z][h][w] && now[z][h][w]==0 && presave[z][h][w]!=1){
+                    now[z][h][w] = presave[z][h][w];
                 }
-                if(presave[z][h][w] != map[z][h][w] && presave[z][h][w] ==1){
-                    map[z][h][w] = 0;
+                if(presave[z][h][w] != now[z][h][w] && presave[z][h][w] ==1){
+                    now[z][h][w] = 0;
                 }
             }
         }
     }
+    return now;
 }

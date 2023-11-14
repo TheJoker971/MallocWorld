@@ -36,8 +36,9 @@ int main(int argc, const char* argv[]){
                 movePlayer(map, depl, p, npc);
                 chargerHPSauvegarde(&p);
                 deplacement ++ ;
+                printf("%d\n",deplacement);
                 if (deplacement == 15){
-                    reloadMap(map);
+                    map = reloadMap(map);
                     deplacement = 0;
                 }
             } else if (depl == ';'){
