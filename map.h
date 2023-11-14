@@ -3,7 +3,7 @@
 
 
 #define height  10 
-#define width   10
+#define width   15
 #define PIXELS      height * width
 
 struct Coordonnee{

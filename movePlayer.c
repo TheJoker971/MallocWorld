@@ -102,6 +102,7 @@ void moveRight(int*** tab, Player p, Npc npc){
             int resultTab = tab[zone][i][j+1];
             if (tab[zone][i][j] == 1 && checkCase(resultTab, p, zone) != 0) {
                 if ( compteur != 0){
+                    printf("DEPLACEMENT");
                     moveRightZone(tab, i, j, p, npc);
                 } else compteur = 1;
             }
@@ -141,7 +142,7 @@ void moveRightZone(int*** tab,int i,int j, Player p, Npc npc){
             break;
 
         default:
-            if(j<9){
+            if(j< (width - 1)){
             tab[zone][i][j+1] = 1;
         } else {
             tab[zone][i][j] = 1;

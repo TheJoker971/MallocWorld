@@ -28,6 +28,7 @@ int checkMovement(int resultTab, Player p, int zone, Npc npc){
         case 2:
             printf("\n\n\nHello, je suis le PNJ\n\n\n");
             pnjMenu(p, npc);
+            result = 1;
             break;
 
         case 3:
