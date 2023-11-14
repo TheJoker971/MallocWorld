@@ -9,17 +9,22 @@ Npc initNpc(){
     return npc;
 }
 
-void canCraft(Craft* c,Object* p){
+int canCraft(Craft* c,Object* p){
     printf("You can craft these Object : \n");
     printf("---------------------------------\n");
     printf("|\tID\t|\tObject\t|\n");
     printf("---------------------------------\n");
+    int ok =  0;
     for(int i =0;i<25;i++){
         if(haveComponent(c[i].composent,p)){
             printf("|\t%d\t|\t%d\t|\n",i+1,c[i].id);
+            ok = 1;
+        }else{
+            printf("|\t \t|\t \t|\n");
         }
     }
     printf("---------------------------------\n");
+    return ok;
 }
 
 int haveComponent(Object* o, Object* inv){

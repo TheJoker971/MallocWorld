@@ -91,7 +91,6 @@ int combatMonstre(Monster *monster, Player *p, int zone) {
                     break;
 
                 case 3:
-                    choosePotion(p);
                     fuir(p);
                     break;
 

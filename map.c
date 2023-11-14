@@ -97,12 +97,42 @@ void drawPart(int** map){
     for(int i =0; i<height;i++){
         for(int j =0;j<width;j++){
             if(j == width-1){
-                printf("%d\n",map[i][j]);
+                color(map[i][j],'\n');
             }else{
-                printf("%d ",map[i][j]);
+                color(map[i][j],' ');
             }
+            
         }
     }
+}
+
+void color(int n,char c){
+    switch(n){
+        case -1:
+        printf("\033[31m%d%c",n,c);
+        break;
+        case 0:
+        printf("  %c",c);
+        break;
+        case 1:
+        printf("\033[0;34m%02d%c",n,c);
+        break;
+        case 2:
+        printf("\033[35m%02d%c",n,c);
+        break;
+        default:
+        if(n == 3 || n == 6 || n == 9){
+            printf("\033[32m%02d%c",n,c);//plante
+        }else if(n == 4 ||n == 7 || n == 10){
+            printf("\033[90m%02d%c",n,c);//roche
+        }else if(n == 5 || n == 8 || n == 11){
+            printf("\033[33m%02d%c",n,c);//bois
+        }else{
+            printf("\033[0m%02d%c",n,c);
+        }
+        break;
+    }
+    printf("\033[0m");
 }
 
 void freeMap(int** map[]){
@@ -313,18 +343,17 @@ int*** chargeDefaultMap(char path[]){
 }
 int*** reloadMap(int** map[]){
     int*** presave= chargeDefaultMap("./presave.txt");
-    int*** now = map;
     for(int z = 0;z<3;z++){
         for(int h=0;h<height;h++){
             for(int w=0;w<width;w++){
-                if(presave[z][h][w] != now[z][h][w] && now[z][h][w]==0 && presave[z][h][w]!=1){
-                    now[z][h][w] = presave[z][h][w];
+                if(presave[z][h][w] != map[z][h][w] && map[z][h][w]==0 && presave[z][h][w]!=1){
+                    map[z][h][w] = presave[z][h][w];
                 }
-                if(presave[z][h][w] != now[z][h][w] && presave[z][h][w] ==1){
-                    now[z][h][w] = 0;
+                if(presave[z][h][w] != map[z][h][w] && presave[z][h][w] ==1){
+                    map[z][h][w] = 0;
                 }
             }
         }
     }
-    return now;
+    return map;
 }

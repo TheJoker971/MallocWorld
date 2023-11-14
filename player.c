@@ -132,20 +132,23 @@ void withdrawInventory(Player p, Object o){
 }
 
 void craftObject(Craft* c,Player p){
-    canCraft(c,p.inventory);
     int id = -1;
-    do{
-        printf("Please enter the id of the item you want craft : ");
-        scanf("%d",&id);
-    }while(id == -1 && !haveComponent(c[id-1].composent,p.inventory));
-    for(int i =0;i<2;i++){
-        withdrawInventory(p,c[id-1].composent[i]);
-    }
-    Object o;
-    if(!addInventory(p.inventory,initObject(c[id-1].id,1))){
+    if(canCraft(c,p.inventory)){
+        do{
+            printf("Please enter the id of the item you want craft : ");
+            scanf("%d",&id);
+        }while(id == -1 && !haveComponent(c[id-1].composent,p.inventory));
         for(int i =0;i<2;i++){
-            addInventory(p.inventory,c[id-1].composent[i]);
+            withdrawInventory(p,c[id-1].composent[i]);
         }
+        Object o;
+        if(!addInventory(p.inventory,initObject(c[id-1].id,1))){
+            for(int i =0;i<2;i++){
+                addInventory(p.inventory,c[id-1].composent[i]);
+            }
+        }
+    }else{
+        printf("Vous ne pouvez rien Crafter!\n");
     }
 }
 
@@ -174,8 +177,8 @@ void savePlayer(Player p,Chest* chest){
     while(current != NULL){
         if(current->object.id != 0){
             fprintf(f,"{%d}@{%d}\n",current->object.quantity,current->object.id);
-            current = current->next;
         } 
+        current = current->next;
     }
     fclose(f);
 }

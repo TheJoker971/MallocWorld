@@ -2,7 +2,7 @@
 #define MAP_H
 
 
-#define height  10 
+#define height  10
 #define width   10
 #define PIXELS      height * width
 
@@ -20,6 +20,7 @@ int** initPart(int);
 int** allowMemory();
 void drawMap(int**[]);
 void drawPart(int**);
+void color(int n,char c);
 void freeMap(int**[]);
 void genereMobs(int**);
 void setBlankMap(int**);

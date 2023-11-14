@@ -28,6 +28,7 @@ int checkMovement(int resultTab, Player p, int zone, Npc npc){
         case 2:
             printf("\n\n\nHello, je suis le PNJ\n\n\n");
             pnjMenu(p, npc);
+            result = 1;
             break;
 
         case 3:
@@ -258,7 +259,7 @@ int portailOpenClose2(int result){
 
 void pnjMenu(Player p, Npc npc){
     int menuChoice;
-    printf("Que veux-tu faire ?\n(1)Reparer\n(2)Crafter\n");
+    printf("Que veux-tu faire ?\n(1)Reparer\n(2)Crafter\n(3)Stocker\n");
     scanf("%d", &menuChoice);
     getchar();
 
@@ -278,6 +279,9 @@ void pnjMenu(Player p, Npc npc){
             craftObject(npc.crafts, p);
             break;
 
+        case 3:
+            storeInChest(p,npc);
+            break;
         default:
             printf("Erreur\n");
             break;
